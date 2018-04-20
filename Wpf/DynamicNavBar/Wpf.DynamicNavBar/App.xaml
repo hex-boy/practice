@@ -1,0 +1,12 @@
+﻿<Application x:Class="Wpf.DynamicNavBar.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:valueConverters="clr-namespace:Wpf.DynamicNavBar.NavigationBar"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         <ResourceDictionary>
+             <valueConverters:BoolToVisibilityConverter x:Key="BoolToHiddenConverter" TrueValue="Visible" FalseValue="Hidden" />
+             <valueConverters:BoolToVisibilityConverter x:Key="BoolToCollapsedConverter" TrueValue="Visible" FalseValue="Collapsed" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

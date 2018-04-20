@@ -1,0 +1,14 @@
+﻿<Window x:Class="Wpf.DynamicNavBar.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf.DynamicNavBar"
+        xmlns:navigationBar="clr-namespace:Wpf.DynamicNavBar.NavigationBar"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525"
+        d:DataContext="{Binding Source={d:DesignInstance Type=local:MainWindowVm, IsDesignTimeCreatable=True}}">
+    <Grid Background="Aquamarine">
+        <navigationBar:NavigationBarControl DataContext="{Binding NavigationBarTray}" />
+    </Grid>
+</Window>

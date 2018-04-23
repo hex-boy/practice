@@ -39,10 +39,10 @@ namespace Wpf.DynamicNavBar.NavigationBar
 
         #region CONSTRUCTORS
 
-        public CommandButtonVm(
+        public CommandButtonVm(string id,
             string name, string description, string imageSourceUri,
             Action executeAction, Func<bool> canExecutFunc)
-            : base(name, description, imageSourceUri)
+            : base(id, name, description, imageSourceUri)
         {
             Command = new DelegateCommand(executeAction, canExecutFunc);
             RaiseCanExecuteChanged();

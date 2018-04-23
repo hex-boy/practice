@@ -22,6 +22,8 @@ namespace Wpf.DynamicNavBar.NavigationBar
     internal interface IButtonVm : INotifyPropertyChanged
     {
 
+        string Id { get; }
+
         string Name { get; }
 
         string Description { get; }
@@ -42,8 +44,9 @@ namespace Wpf.DynamicNavBar.NavigationBar
     internal abstract class ButtonBaseVm : VmBase, IButtonVm
     {
 
-        protected ButtonBaseVm(string name, string description, string imageSourceUri)
+        protected ButtonBaseVm(string id, string name, string description, string imageSourceUri)
         {
+            Id = id;
             Name = name;
             Description = description;
             ImageSourceUri = new Uri(imageSourceUri, UriKind.RelativeOrAbsolute);
@@ -51,6 +54,8 @@ namespace Wpf.DynamicNavBar.NavigationBar
 
 
         #region IButtonVm
+
+        public string Id { get; }
 
         public string Name { get; }
 

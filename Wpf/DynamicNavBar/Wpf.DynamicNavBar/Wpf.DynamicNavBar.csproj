@@ -146,6 +146,15 @@
     <Resource Include="Resources\Icons\SelectOnline_16.png" />
     <Resource Include="Resources\Icons\settings_16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\database_run_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\database_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\database_edit_32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

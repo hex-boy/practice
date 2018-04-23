@@ -52,10 +52,10 @@ namespace Wpf.DynamicNavBar.NavigationBar.NavBarTrayVmDts
 
             _commandsCollection = new List<CommandButtonVm>
             {
-                new CommandButtonVm(
+                new CommandButtonVm("Root.Home",
                     CommandsEnum.Home.ToString(), "Home Command", @"pack://application:,,,/Resources/Icons/Home_5699.png", HomeCommandMethod,
                     HomeCommandCanExecuteMethod),
-                new CommandButtonVm(
+                new CommandButtonVm("Root.Folder",
                     CommandsEnum.Folder.ToString(), "Folder Command", "pack://application:,,,/Resources/Icons/Folder_6221.png", FolderCommandMethod,
                     FolderCommandCanExecuteMethod)
             };
@@ -67,10 +67,11 @@ namespace Wpf.DynamicNavBar.NavigationBar.NavBarTrayVmDts
             var navBar2 = new NavBarVm(
                 new List<IButtonVm>
                 {
-                    new CommandButtonVm(
-                        "Copy", "Execute copy action.", "pack://application:,,,/Resources/Icons/GenerateAll.png",
-                        () => { MessageBox.Show("Copy Command - executed"); }, () => true),
-                    new ToogleButtonVm("Store On/Off", "Store to database is activated/deactivated", "pack://application:,,,/Resources/Icons/settings_16.png")
+                    new CommandButtonVm("Database.Store",
+                        "Store to DB", "Store results to DB", "pack://application:,,,/Resources/Icons/database_edit_32.png",
+                        () => { MessageBox.Show("Store Command - executed"); }, () => true),
+                    new ToogleButtonVm("Database.StoreActive",
+                        "Store On/Off", "Store to database during test-run is activated/deactivated", "pack://application:,,,/Resources/Icons/database_run_32.png")
                 });
 
             Add(navBar2);

@@ -11,14 +11,15 @@
     <UserControl.Resources>
         
         <ControlTemplate x:Key="ButtonBaseTemplate" TargetType="ButtonBase">
-            <Border BorderThickness="{TemplateBinding BorderThickness}" 
+            <Border BorderThickness="{TemplateBinding BorderThickness}"
                     BorderBrush="{TemplateBinding BorderBrush}">
                 <ContentPresenter />
             </Border>
         </ControlTemplate>
         
         <DataTemplate x:Key="ButtonBaseDataTemplate" DataType="local:ButtonBaseVm">
-            <Grid Width="18" Height="18">
+            <Grid Width="20" 
+                  Height="20">
                 <Image Width="16" 
                        Height="16" 
                        Source="{Binding ImageSourceUri}" />

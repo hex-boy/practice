@@ -24,8 +24,8 @@ namespace Wpf.DynamicNavBar.NavigationBar
 
         private bool _toogleButtonOn;
 
-        public ToogleButtonVm(string name, string description, string imageSourceUri)
-            : base(name, description, imageSourceUri) { }
+        public ToogleButtonVm(string id, string name, string description, string imageSourceUri)
+            : base(id, name, description, imageSourceUri) { }
 
 
         #region INotifyPropertyChanged

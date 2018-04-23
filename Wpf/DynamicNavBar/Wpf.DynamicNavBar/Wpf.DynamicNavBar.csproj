@@ -91,12 +91,16 @@
   <ItemGroup>
     <Compile Include="MainWindowVm.cs" />
     <Compile Include="NavigationBar\BoolToVisibilityConverter.cs" />
+    <Compile Include="NavigationBar\ButtonBaseVm.cs" />
+    <Compile Include="NavigationBar\ButtonDataTemplateSelector.cs" />
     <Compile Include="NavigationBar\NavBarTrayVm.cs" />
+    <Compile Include="NavigationBar\NavBarTrayVmDts\NavBarTrayVmDt.cs" />
     <Compile Include="NavigationBar\NavigationBarControl.xaml.cs">
       <DependentUpon>NavigationBarControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="NavigationBar\NavBarVm.cs" />
     <Compile Include="NavigationBar\CommandButtonVm.cs" />
+    <Compile Include="NavigationBar\ToogleButtonVm.cs" />
     <Compile Include="NavigationBar\VmBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -2,67 +2,86 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:model="clr-namespace:Wpf.DynamicNavBar.NavigationBar"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Wpf.DynamicNavBar.NavigationBar"
+             xmlns:navBarTrayVmDts="clr-namespace:Wpf.DynamicNavBar.NavigationBar.NavBarTrayVmDts"
              mc:Ignorable="d" 
-             d:DataContext="{Binding Source={d:DesignInstance Type=model:NavBarTrayVm, IsDesignTimeCreatable=True}}">
+             d:DataContext="{Binding Source={d:DesignInstance Type=navBarTrayVmDts:NavBarTrayVmDt, IsDesignTimeCreatable=True}}">
 
     <UserControl.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style x:Key="ButtonStyle" TargetType="ButtonBase">
             <Setter Property="Margin" Value="2,0" />
-            <Style.Triggers>
+            <!--<Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </Trigger>
-            </Style.Triggers>
-        </Style>    
+            </Style.Triggers>-->
+        </Style>
+
+        <local:ButtonDataTemplateSelector x:Key="ButtonDataTemplateSelector" />
+        
     </UserControl.Resources>
-
-
-    <!--<ItemsControl HorizontalAlignment="Left" 
-                  VerticalAlignment="Top" ItemsSource="{Binding}"  >-->
 
     <ItemsControl HorizontalAlignment="Left" 
                   VerticalAlignment="Top" ItemsSource="{Binding}" >
-       
+
+        <ItemsControl.Resources>
+            
+            <DataTemplate x:Key="CommandButtonVmDataTemplate" DataType="{x:Type local:CommandButtonVm}">
+                <Button Visibility="{Binding IsVisible, Converter={StaticResource BoolToCollapsedConverter}}"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="{Binding Command}" >
+                    <Button.Content>
+                        <Image Width="16" 
+                               Height="16" 
+                               Source="{Binding ImageSourceUri}" />
+                    </Button.Content>
+                    <Button.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" 
+                                       FontWeight="Bold" />
+                            <TextBlock Text="{Binding Description}" 
+                                       FontStyle="Italic" />
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="ToogleButtonVmDataTemplate" DataType="{x:Type local:ToogleButtonVm}">
+                <ToggleButton Visibility="{Binding IsVisible, Converter={StaticResource BoolToCollapsedConverter}}"
+                              Style="{StaticResource ButtonStyle}"
+                              IsChecked="{Binding ToogleButtonOn}">
+                    <ToggleButton.Content>
+                        <Image Width="16" 
+                               Height="16" 
+                               Source="{Binding ImageSourceUri}" />
+                    </ToggleButton.Content>
+                    <ToggleButton.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" 
+                                       FontWeight="Bold" />
+                            <TextBlock Text="{Binding Description}" 
+                                       FontStyle="Italic" />
+                        </StackPanel>
+                    </ToggleButton.ToolTip>
+                </ToggleButton>
+                
+            </DataTemplate>
+            
+        </ItemsControl.Resources>
+
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
-
-        <!--<ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Button Content="Button" Margin="0,0,5,5" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>-->
         
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 
                 <ToolBar Visibility="{Binding ToolBarVisible, Converter={StaticResource BoolToCollapsedConverter}}" 
-                         ItemsSource="{Binding CommandButtonsVms}" >
-                    <ToolBar.ItemTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding}" 
-                                    Style="{StaticResource ButtonStyle}">
-                                <Button.Content>
-                                    <Image Width="16" 
-                                           Height="16" 
-                                           Source="{Binding ImageSourceUri}" />
-                                </Button.Content>
-                                <Button.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   FontWeight="Bold" />
-                                        <TextBlock Text="{Binding Description}" 
-                                                   FontStyle="Italic" />
-                                    </StackPanel>
-                                </Button.ToolTip>
-                            </Button>
-                        </DataTemplate>
-                    </ToolBar.ItemTemplate>
+                         ItemsSource="{Binding CommandButtonsVms}"
+                         ItemTemplateSelector="{StaticResource ButtonDataTemplateSelector}">
                 </ToolBar>
                 
             </DataTemplate>

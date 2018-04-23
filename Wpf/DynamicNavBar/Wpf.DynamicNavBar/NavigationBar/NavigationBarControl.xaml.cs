@@ -11,10 +11,7 @@
 
 #region Used namespaces
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -28,6 +25,7 @@ namespace Wpf.DynamicNavBar.NavigationBar
     /// </summary>
     public partial class NavigationBarControl : UserControl
     {
+
         private readonly DispatcherTimer _timer;
         private readonly DispatcherTimer _oldTimer;
 
@@ -36,18 +34,12 @@ namespace Wpf.DynamicNavBar.NavigationBar
 
         private readonly List<CommandButtonVm> _commandsCollection;
 
-
         public NavigationBarControl()
         {
             InitializeComponent();
 
-
             //_timer.Start();
         }
 
-
-
     }
-
-
 }

@@ -12,8 +12,7 @@
 #region Used namespaces
 
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 using Prism.Commands;
 
@@ -22,8 +21,20 @@ using Prism.Commands;
 
 namespace Wpf.DynamicNavBar.NavigationBar
 {
-    internal class CommandButtonVm : DelegateCommand, INotifyPropertyChanged
+    internal interface ICommandButtonVm : IButtonVm
     {
+
+        ICommand Command { get; }
+
+        void RaiseCanExecuteChanged();
+
+    }
+
+
+    internal class CommandButtonVm : ButtonBaseVm, ICommandButtonVm
+    {
+
+        private bool _isVisible;
 
 
         #region CONSTRUCTORS
@@ -31,41 +42,42 @@ namespace Wpf.DynamicNavBar.NavigationBar
         public CommandButtonVm(
             string name, string description, string imageSourceUri,
             Action executeAction, Func<bool> canExecutFunc)
-            : base(executeAction, canExecutFunc)
+            : base(name, description, imageSourceUri)
         {
-            Name = name;
-            Description = description;
-            ImageSourceUri = new Uri(imageSourceUri, UriKind.RelativeOrAbsolute);
+            Command = new DelegateCommand(executeAction, canExecutFunc);
+            RaiseCanExecuteChanged();
         }
 
         #endregion
 
 
-        public string Name { get; }
+        #region IButtonVm
 
-        public string Description { get; }
-
-
-        /// <summary>
-        /// Gets the image URI source.
-        /// </summary>
-        /// <remarks>
-        /// like i.e. "pack://application:,,,/Images/Menu/Home_5699.png"
-        /// </remarks>
-        public Uri ImageSourceUri { get; }
-
-
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        public new bool IsVisible
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+        #region ICommandButtonVm
+
+        public ICommand Command { get; }
+
+        public void RaiseCanExecuteChanged()
+        {
+            IsVisible = Command.CanExecute(null);
+
+            ((DelegateCommand) Command).RaiseCanExecuteChanged();
         }
 
         #endregion
 
     }
-
 }

@@ -9,13 +9,53 @@
              d:DataContext="{Binding Source={d:DesignInstance Type=navBarTrayVmDts:NavBarTrayVmDt, IsDesignTimeCreatable=True}}">
 
     <UserControl.Resources>
-        <Style x:Key="ButtonStyle" TargetType="ButtonBase">
+        
+        <ControlTemplate x:Key="ButtonBaseTemplate" TargetType="ButtonBase">
+            <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                    BorderBrush="{TemplateBinding BorderBrush}">
+                <ContentPresenter />
+            </Border>
+        </ControlTemplate>
+        
+        <DataTemplate x:Key="ButtonBaseDataTemplate" DataType="local:ButtonBaseVm">
+            <Grid Width="18" Height="18">
+                <Image Width="16" 
+                       Height="16" 
+                       Source="{Binding ImageSourceUri}" />
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="ButtonToolTipDataTemplate" DataType="local:ButtonBaseVm">
+            <StackPanel>
+                <TextBlock Text="{Binding Name}" 
+                           FontWeight="Bold" />
+                <TextBlock Text="{Binding Description}" 
+                           FontStyle="Italic" />
+            </StackPanel>
+        </DataTemplate>
+        
+        <Style x:Key="ButtonBaseStyle" TargetType="ButtonBase">
             <Setter Property="Margin" Value="2,0" />
-            <!--<Style.Triggers>
-                <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="DodgerBlue"></Setter>
                 </Trigger>
-            </Style.Triggers>-->
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="CommandButtonStyle" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="Button">
+
+        </Style>
+
+        <Style x:Key="ToggleButtonStyle" BasedOn="{StaticResource ButtonBaseStyle}" TargetType="ToggleButton">
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="BorderBrush" Value="DodgerBlue" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <local:ButtonDataTemplateSelector x:Key="ButtonDataTemplateSelector" />
@@ -29,40 +69,26 @@
             
             <DataTemplate x:Key="CommandButtonVmDataTemplate" DataType="{x:Type local:CommandButtonVm}">
                 <Button Visibility="{Binding IsVisible, Converter={StaticResource BoolToCollapsedConverter}}"
-                        Style="{StaticResource ButtonStyle}"
-                        Command="{Binding Command}" >
-                    <Button.Content>
-                        <Image Width="16" 
-                               Height="16" 
-                               Source="{Binding ImageSourceUri}" />
-                    </Button.Content>
+                        Style="{StaticResource CommandButtonStyle}"
+                        Command="{Binding Command}" 
+                        Template="{StaticResource ButtonBaseTemplate}" 
+                        ContentTemplate ="{StaticResource ButtonBaseDataTemplate}" 
+                        Content="{Binding}" >
                     <Button.ToolTip>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" 
-                                       FontWeight="Bold" />
-                            <TextBlock Text="{Binding Description}" 
-                                       FontStyle="Italic" />
-                        </StackPanel>
+                        <ToolTip ContentTemplate="{StaticResource ButtonToolTipDataTemplate}" Content="{Binding}" />
                     </Button.ToolTip>
                 </Button>
             </DataTemplate>
             
             <DataTemplate x:Key="ToogleButtonVmDataTemplate" DataType="{x:Type local:ToogleButtonVm}">
                 <ToggleButton Visibility="{Binding IsVisible, Converter={StaticResource BoolToCollapsedConverter}}"
-                              Style="{StaticResource ButtonStyle}"
-                              IsChecked="{Binding ToogleButtonOn}">
-                    <ToggleButton.Content>
-                        <Image Width="16" 
-                               Height="16" 
-                               Source="{Binding ImageSourceUri}" />
-                    </ToggleButton.Content>
+                              Style="{StaticResource ToggleButtonStyle}"
+                              IsChecked="{Binding ToogleButtonOn}"
+                              Template="{StaticResource ButtonBaseTemplate}"
+                              ContentTemplate="{StaticResource ButtonBaseDataTemplate}"
+                              Content="{Binding}" >
                     <ToggleButton.ToolTip>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" 
-                                       FontWeight="Bold" />
-                            <TextBlock Text="{Binding Description}" 
-                                       FontStyle="Italic" />
-                        </StackPanel>
+                        <ToolTip ContentTemplate="{StaticResource ButtonToolTipDataTemplate}" Content="{Binding}" />
                     </ToggleButton.ToolTip>
                 </ToggleButton>
                 

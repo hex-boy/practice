@@ -12,12 +12,12 @@
         xmlns:avThemeMetro="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.Metro"
         xmlns:avThemeVs="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.VS2010"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="640" Width="820">
     <DockPanel LastChildFill="True">
 
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
             <TextBlock Text="Theme:" Margin="0,0,10,0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="_themeCombo" SelectedIndex="0" Width="200">
+            <ComboBox x:Name="_themeCombo" SelectedIndex="0" Width="160">
                 <ComboBoxItem Content="Generic" />
                 <ComboBoxItem Content="Aero">
                     <ComboBoxItem.Tag>
@@ -51,11 +51,11 @@
             </avRoot:DockingManager.DocumentHeaderTemplate>
             <avLayout:LayoutRoot x:Name="_layoutRoot">
                 <avLayout:LayoutPanel Orientation="Horizontal">
-                    <avLayout:LayoutAnchorablePane DockWidth="200">
+                    <avLayout:LayoutAnchorablePane DockWidth="240">
                         <avLayout:LayoutAnchorable ContentId="properties" Title="Properties" CanHide="False" CanClose="False"
                                                AutoHideWidth="240"
                                                IconSource="../Images/property-blue.png">
-                            <xctk:PropertyGrid NameColumnWidth="200"
+                            <xctk:PropertyGrid NameColumnWidth="120"
                                                SelectedObject="{Binding ElementName=_layoutRoot, Path=LastFocusedDocument.Content}"/>
                         </avLayout:LayoutAnchorable>
                     </avLayout:LayoutAnchorablePane>
@@ -69,7 +69,7 @@
                             </avLayout:LayoutDocument>
                         </avLayout:LayoutDocumentPane>
                     </avLayout:LayoutDocumentPaneGroup >
-                    <avLayout:LayoutAnchorablePaneGroup DockWidth="125">
+                    <avLayout:LayoutAnchorablePaneGroup DockWidth="200">
                         <avLayout:LayoutAnchorablePane>
                             <avLayout:LayoutAnchorable ContentId="alarms" Title="Alarms" IconSource="../Images/alarm-clock-blue.png" >
                                 <ListBox>

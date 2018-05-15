@@ -9,13 +9,9 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <DockPanel LastChildFill="True">
 
-        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
             <TextBlock Text="Theme:" Margin="0,0,10,0" VerticalAlignment="Center"/>
             <ComboBox x:Name="_themeCombo" SelectedIndex="0" Width="200">
                 <ComboBoxItem Content="Generic" />
@@ -37,8 +33,7 @@
             </ComboBox>
         </StackPanel>
 
-        <xcad:DockingManager Grid.Row="1" MaxHeight="425"
-                             AllowMixedOrientation="True"
+        <xcad:DockingManager AllowMixedOrientation="True"
                              BorderBrush="Black"
                              BorderThickness="1"
                              Theme="{Binding ElementName=_themeCombo, Path=SelectedItem.Tag}">
@@ -109,6 +104,6 @@
                 </xcad:LayoutRoot.LeftSide>
             </xcad:LayoutRoot>
         </xcad:DockingManager>
-    </Grid>
+    </DockPanel>
 
 </Window>

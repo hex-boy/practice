@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AvalonDocking"
-        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:avRoot="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:avLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:avThemeAero="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.Aero"
+        xmlns:avThemeMetro="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.Metro"
+        xmlns:avThemeVs="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.VS2010"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel LastChildFill="True">
@@ -17,64 +21,64 @@
                 <ComboBoxItem Content="Generic" />
                 <ComboBoxItem Content="Aero">
                     <ComboBoxItem.Tag>
-                        <xcad:AeroTheme />
+                        <avThemeAero:AeroTheme />
                     </ComboBoxItem.Tag>
                 </ComboBoxItem>
                 <ComboBoxItem Content="VS2010">
                     <ComboBoxItem.Tag>
-                        <xcad:VS2010Theme />
+                        <avThemeVs:VS2010Theme />
                     </ComboBoxItem.Tag>
                 </ComboBoxItem>
                 <ComboBoxItem Content="Metro">
                     <ComboBoxItem.Tag>
-                        <xcad:MetroTheme />
+                        <avThemeMetro:MetroTheme />
                     </ComboBoxItem.Tag>
                 </ComboBoxItem>
             </ComboBox>
         </StackPanel>
 
-        <xcad:DockingManager AllowMixedOrientation="True"
+        <avRoot:DockingManager AllowMixedOrientation="True"
                              BorderBrush="Black"
                              BorderThickness="1"
                              Theme="{Binding ElementName=_themeCombo, Path=SelectedItem.Tag}">
-            <xcad:DockingManager.DocumentHeaderTemplate>
+            <avRoot:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
                         <TextBlock Text="{Binding Title}" />
                     </StackPanel>
                 </DataTemplate>
-            </xcad:DockingManager.DocumentHeaderTemplate>
-            <xcad:LayoutRoot x:Name="_layoutRoot">
-                <xcad:LayoutPanel Orientation="Horizontal">
-                    <xcad:LayoutAnchorablePane DockWidth="200">
-                        <xcad:LayoutAnchorable ContentId="properties" Title="Properties" CanHide="False" CanClose="False"
+            </avRoot:DockingManager.DocumentHeaderTemplate>
+            <avLayout:LayoutRoot x:Name="_layoutRoot">
+                <avLayout:LayoutPanel Orientation="Horizontal">
+                    <avLayout:LayoutAnchorablePane DockWidth="200">
+                        <avLayout:LayoutAnchorable ContentId="properties" Title="Properties" CanHide="False" CanClose="False"
                                                AutoHideWidth="240"
                                                IconSource="../Images/property-blue.png">
-                            <xctk:PropertyGrid NameColumnWidth="110"
+                            <xctk:PropertyGrid NameColumnWidth="200"
                                                SelectedObject="{Binding ElementName=_layoutRoot, Path=LastFocusedDocument.Content}"/>
-                        </xcad:LayoutAnchorable>
-                    </xcad:LayoutAnchorablePane>
-                    <xcad:LayoutDocumentPaneGroup >
-                        <xcad:LayoutDocumentPane>
-                            <xcad:LayoutDocument ContentId="document1" Title="Document 1" IconSource="../Images/document.png" >
+                        </avLayout:LayoutAnchorable>
+                    </avLayout:LayoutAnchorablePane>
+                    <avLayout:LayoutDocumentPaneGroup >
+                        <avLayout:LayoutDocumentPane>
+                            <avLayout:LayoutDocument ContentId="document1" Title="Document 1" IconSource="../Images/document.png" >
                                 <Button Content="Document 1 Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </xcad:LayoutDocument>
-                            <xcad:LayoutDocument ContentId="document2" Title="Document 2" IconSource="../Images/document.png">
+                            </avLayout:LayoutDocument>
+                            <avLayout:LayoutDocument ContentId="document2" Title="Document 2" IconSource="../Images/document.png">
                                 <TextBox Text="Document 2 Content" AcceptsReturn="True"/>
-                            </xcad:LayoutDocument>
-                        </xcad:LayoutDocumentPane>
-                    </xcad:LayoutDocumentPaneGroup >
-                    <xcad:LayoutAnchorablePaneGroup DockWidth="125">
-                        <xcad:LayoutAnchorablePane>
-                            <xcad:LayoutAnchorable ContentId="alarms" Title="Alarms" IconSource="../Images/alarm-clock-blue.png" >
+                            </avLayout:LayoutDocument>
+                        </avLayout:LayoutDocumentPane>
+                    </avLayout:LayoutDocumentPaneGroup >
+                    <avLayout:LayoutAnchorablePaneGroup DockWidth="125">
+                        <avLayout:LayoutAnchorablePane>
+                            <avLayout:LayoutAnchorable ContentId="alarms" Title="Alarms" IconSource="../Images/alarm-clock-blue.png" >
                                 <ListBox>
                                     <system:String>Alarm 1</system:String>
                                     <system:String>Alarm 2</system:String>
                                     <system:String>Alarm 3</system:String>
                                 </ListBox>
-                            </xcad:LayoutAnchorable>
-                            <xcad:LayoutAnchorable ContentId="journal" Title="Journal" >
+                            </avLayout:LayoutAnchorable>
+                            <avLayout:LayoutAnchorable ContentId="journal" Title="Journal" >
                                 <RichTextBox>
                                     <FlowDocument>
                                         <Paragraph FontSize="14" FontFamily="Segoe">
@@ -85,25 +89,26 @@
                                         </Paragraph>
                                     </FlowDocument>
                                 </RichTextBox>
-                            </xcad:LayoutAnchorable>
-                        </xcad:LayoutAnchorablePane>
-                    </xcad:LayoutAnchorablePaneGroup>
-                </xcad:LayoutPanel>
+                            </avLayout:LayoutAnchorable>
+                        </avLayout:LayoutAnchorablePane>
+                    </avLayout:LayoutAnchorablePaneGroup>
+                </avLayout:LayoutPanel>
 
-                <xcad:LayoutRoot.LeftSide>
-                    <xcad:LayoutAnchorSide>
-                        <xcad:LayoutAnchorGroup>
-                            <xcad:LayoutAnchorable Title="Agenda" ContentId="agenda" IconSource="../Images/address-book-open.png">
+                <avLayout:LayoutRoot.LeftSide>
+                    <avLayout:LayoutAnchorSide>
+                        <avLayout:LayoutAnchorGroup>
+                            <avLayout:LayoutAnchorable Title="Agenda" ContentId="agenda" IconSource="../Images/address-book-open.png">
                                 <TextBlock Text="Agenda Content" Margin="10" FontSize="18" FontWeight="Black" TextWrapping="Wrap"/>
-                            </xcad:LayoutAnchorable>
-                            <xcad:LayoutAnchorable Title="Contacts" ContentId="contacts" IconSource="../Images/address-book--pencil.png" >
+                            </avLayout:LayoutAnchorable>
+                            <avLayout:LayoutAnchorable Title="Contacts" ContentId="contacts" IconSource="../Images/address-book--pencil.png" >
                                 <TextBlock Text="Contacts Content" Margin="10" FontSize="18" FontWeight="Black" TextWrapping="Wrap"/>
-                            </xcad:LayoutAnchorable>
-                        </xcad:LayoutAnchorGroup>
-                    </xcad:LayoutAnchorSide>
-                </xcad:LayoutRoot.LeftSide>
-            </xcad:LayoutRoot>
-        </xcad:DockingManager>
+                            </avLayout:LayoutAnchorable>
+                        </avLayout:LayoutAnchorGroup>
+                    </avLayout:LayoutAnchorSide>
+                </avLayout:LayoutRoot.LeftSide>
+            </avLayout:LayoutRoot>
+        </avRoot:DockingManager>
     </DockPanel>
 
 </Window>
+

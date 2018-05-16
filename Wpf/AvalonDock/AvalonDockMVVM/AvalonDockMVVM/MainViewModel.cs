@@ -11,6 +11,7 @@
 
 #region Used namespaces
 
+using System;
 using System.Collections.Generic;
 
 using AvalonDockMVVM.ViewModel;
@@ -35,7 +36,8 @@ namespace AvalonDockMVVM
                 documents.Add(new SampleDockWindowViewModel
                 {
                     Title = "Sample " + i,
-                    CanClose = i % 2 == 0
+                    CanClose = i % 2 == 0,
+                    ImageSource = new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png")
                 });
 
             DockManagerViewModel = new DockManagerViewModel(documents);

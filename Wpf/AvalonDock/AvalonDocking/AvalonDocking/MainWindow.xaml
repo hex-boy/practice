@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AvalonDocking"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:avRoot="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:av="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:avLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
         xmlns:avThemeAero="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.Aero"
         xmlns:avThemeMetro="clr-namespace:Xceed.Wpf.AvalonDock.Themes;assembly=Xceed.Wpf.AvalonDock.Themes.Metro"
@@ -37,18 +37,18 @@
             </ComboBox>
         </StackPanel>
 
-        <avRoot:DockingManager AllowMixedOrientation="True"
+        <av:DockingManager AllowMixedOrientation="True"
                              BorderBrush="Black"
                              BorderThickness="1"
                              Theme="{Binding ElementName=_themeCombo, Path=SelectedItem.Tag}">
-            <avRoot:DockingManager.DocumentHeaderTemplate>
+            <av:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
                         <TextBlock Text="{Binding Title}" />
                     </StackPanel>
                 </DataTemplate>
-            </avRoot:DockingManager.DocumentHeaderTemplate>
+            </av:DockingManager.DocumentHeaderTemplate>
             <avLayout:LayoutRoot x:Name="_layoutRoot">
                 <avLayout:LayoutPanel Orientation="Horizontal">
                     <avLayout:LayoutAnchorablePane DockWidth="240">
@@ -94,7 +94,7 @@
                     </avLayout:LayoutAnchorablePaneGroup>
                 </avLayout:LayoutPanel>
 
-                <avLayout:LayoutRoot.LeftSide>
+                <avLayout:LayoutRoot.RightSide>
                     <avLayout:LayoutAnchorSide>
                         <avLayout:LayoutAnchorGroup>
                             <avLayout:LayoutAnchorable Title="Agenda" ContentId="agenda" IconSource="../Images/address-book-open.png">
@@ -105,9 +105,9 @@
                             </avLayout:LayoutAnchorable>
                         </avLayout:LayoutAnchorGroup>
                     </avLayout:LayoutAnchorSide>
-                </avLayout:LayoutRoot.LeftSide>
+                </avLayout:LayoutRoot.RightSide>
             </avLayout:LayoutRoot>
-        </avRoot:DockingManager>
+        </av:DockingManager>
     </DockPanel>
 
 </Window>

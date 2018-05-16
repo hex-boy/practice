@@ -11,6 +11,7 @@
 
 #region Used namespaces
 
+using System;
 using System.Windows.Input;
 
 #endregion
@@ -30,6 +31,25 @@ namespace AvalonDockMVVM.ViewModel
         public ICommand CloseCommand
         {
             get { return _closeCommand ?? (_closeCommand = new RelayCommand(call => Close())); }
+        }
+
+        #endregion
+
+
+        #region ImageSource
+
+        private Uri _imageSource;
+
+        public Uri ImageSource
+        {
+            get { return _imageSource; }
+            set
+            {
+                if (_imageSource == value)
+                    return;
+                _imageSource = value;
+                OnPropertyChanged(nameof(ImageSource));
+            }
         }
 
         #endregion

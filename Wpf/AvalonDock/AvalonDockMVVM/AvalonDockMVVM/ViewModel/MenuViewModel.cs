@@ -1,52 +1,64 @@
-﻿using System;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="MenuViewModel.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
+
+
+#region Used namespaces
+
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
+
 
 namespace AvalonDockMVVM.ViewModel
 {
-  public class MenuViewModel
-  {
-    public IEnumerable<MenuItemViewModel> Items { get; private set; }
-
-    private readonly MenuItemViewModel ViewMenuItemViewModel;
-
-    public MenuViewModel(IEnumerable<DockWindowViewModel> dockWindows)
+    public class MenuViewModel
     {
-      var view = this.ViewMenuItemViewModel = new MenuItemViewModel() { Header = "Views" };
 
-      foreach (var dockWindow in dockWindows)
-        view.Items.Add(GetMenuItemViewModel(dockWindow));
+        public IEnumerable<MenuItemViewModel> Items { get; }
 
-      var items = new List<MenuItemViewModel>();
-      items.Add(view);
-      this.Items = items;
+        private readonly MenuItemViewModel _viewMenuItemViewModel;
+
+        public MenuViewModel(IEnumerable<DockWindowViewModel> dockWindows)
+        {
+            var view = _viewMenuItemViewModel = new MenuItemViewModel {Header = "Views"};
+
+            foreach (var dockWindow in dockWindows)
+                view.Items.Add(GetMenuItemViewModel(dockWindow));
+
+            var items = new List<MenuItemViewModel>();
+            items.Add(view);
+            Items = items;
+        }
+
+        private MenuItemViewModel GetMenuItemViewModel(DockWindowViewModel dockWindowViewModel)
+        {
+            var menuItemViewModel = new MenuItemViewModel();
+            menuItemViewModel.IsCheckable = true;
+
+            menuItemViewModel.Header = dockWindowViewModel.Title;
+            menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
+
+            dockWindowViewModel.PropertyChanged += (o, e) =>
+            {
+                if (e.PropertyName == nameof(DockWindowViewModel.IsClosed))
+                    menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
+            };
+
+            menuItemViewModel.PropertyChanged += (o, e) =>
+            {
+                if (e.PropertyName == nameof(MenuItemViewModel.IsChecked))
+                    dockWindowViewModel.IsClosed = !menuItemViewModel.IsChecked;
+            };
+
+            return menuItemViewModel;
+        }
+
     }
-
-    private MenuItemViewModel GetMenuItemViewModel(DockWindowViewModel dockWindowViewModel)
-    {
-      var menuItemViewModel = new MenuItemViewModel();
-      menuItemViewModel.IsCheckable = true;
-
-      menuItemViewModel.Header = dockWindowViewModel.Title;
-      menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
-
-      dockWindowViewModel.PropertyChanged += (o, e) =>
-      {
-        if (e.PropertyName == nameof(DockWindowViewModel.IsClosed))
-          menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
-      };
-
-      menuItemViewModel.PropertyChanged += (o, e) =>
-      {
-        if (e.PropertyName == nameof(MenuItemViewModel.IsChecked))
-          dockWindowViewModel.IsClosed = !menuItemViewModel.IsChecked;
-      };
-
-      return menuItemViewModel;
-    }
-  }
 }

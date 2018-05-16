@@ -1,88 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="DockWindowViewModel.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
+
+
+#region Used namespaces
+
 using System.Windows.Input;
+
+#endregion
+
 
 namespace AvalonDockMVVM.ViewModel
 {
-  public abstract class DockWindowViewModel : BaseViewModel
-  {
-    #region Properties
-
-    #region CloseCommand
-    private ICommand _CloseCommand;
-    public ICommand CloseCommand
+    public abstract class DockWindowViewModel : BaseViewModel
     {
-      get
-      {
-        if (_CloseCommand == null)
-          _CloseCommand = new RelayCommand(call => Close());
-        return _CloseCommand;
-      }
-    }
-    #endregion
 
-    #region IsClosed
-    private bool _IsClosed;
-    public bool IsClosed
-    {
-      get { return _IsClosed; }
-      set
-      {
-        if (_IsClosed != value)
+        #region Properties
+
+        #region CloseCommand
+
+        private ICommand _closeCommand;
+
+        public ICommand CloseCommand
         {
-          _IsClosed = value;
-          OnPropertyChanged(nameof(IsClosed));
+            get { return _closeCommand ?? (_closeCommand = new RelayCommand(call => Close())); }
         }
-      }
-    }
-    #endregion
 
-    #region CanClose
-    private bool _CanClose;
-    public bool CanClose
-    {
-      get { return _CanClose; }
-      set
-      {
-        if (_CanClose != value)
+        #endregion
+
+
+        #region IsClosed
+
+        private bool _isClosed;
+
+        public bool IsClosed
         {
-          _CanClose = value;
-          OnPropertyChanged(nameof(CanClose));
+            get { return _isClosed; }
+            set
+            {
+                if (_isClosed == value)
+                    return;
+                _isClosed = value;
+                OnPropertyChanged(nameof(IsClosed));
+            }
         }
-      }
-    }
-    #endregion
 
-    #region Title
-    private string _Title;
-    public string Title
-    {
-      get { return _Title; }
-      set
-      {
-        if (_Title != value)
+        #endregion
+
+
+        #region CanClose
+
+        private bool _canClose;
+
+        public bool CanClose
         {
-          _Title = value;
-          OnPropertyChanged(nameof(Title));
+            get { return _canClose; }
+            set
+            {
+                if (_canClose == value)
+                    return;
+                _canClose = value;
+                OnPropertyChanged(nameof(CanClose));
+            }
         }
-      }
-    }
-    #endregion
 
-    #endregion
+        #endregion
 
-    public DockWindowViewModel()
-    {
-      this.CanClose = true;
-      this.IsClosed = false;
-    }
 
-    public void Close()
-    {
-      this.IsClosed = true;
+        #region Title
+
+        private string _title;
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                if (_title == value)
+                    return;
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+
+        public DockWindowViewModel()
+        {
+            CanClose = true;
+            IsClosed = false;
+        }
+
+        public void Close()
+        {
+            IsClosed = true;
+        }
+
     }
-  }
 }

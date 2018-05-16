@@ -1,29 +1,36 @@
-﻿using AvalonDockMVVM.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="App.xaml.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
+
+
+#region Used namespaces
+
 using System.Windows;
+
+#endregion
+
 
 namespace AvalonDockMVVM
 {
-  /// <summary>
-  /// Interaction logic for App.xaml
-  /// </summary>
-  public partial class App : Application
-  {
-    private void Application_Startup(object sender, StartupEventArgs e)
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
     {
-      /* create the window */
-      var mainWindow = new MainWindow();
-      this.MainWindow = mainWindow;
-      mainWindow.Show();
 
-      /* attach the mainViewModel */
-      var mainViewModel = new MainViewModel();
-      mainWindow.DataContext = mainViewModel;
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow = new MainWindow();
+            MainWindow.Show();
+
+            MainWindow.DataContext = new MainViewModel();
+        }
+
     }
-  }
 }

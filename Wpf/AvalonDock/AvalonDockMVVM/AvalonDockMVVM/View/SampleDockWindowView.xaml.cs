@@ -1,28 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="SampleDockWindowView.xaml.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
+
+
+#region Used namespaces
+
+
+
+#endregion
+
 
 namespace AvalonDockMVVM.View
 {
-  /// <summary>
-  /// Interaction logic for SampleDockWindowView.xaml
-  /// </summary>
-  public partial class SampleDockWindowView : UserControl
-  {
-    public SampleDockWindowView()
+    /// <summary>
+    /// Interaction logic for SampleDockWindowView.xaml
+    /// </summary>
+    public partial class SampleDockWindowView
     {
-      InitializeComponent();
+
+        public SampleDockWindowView()
+        {
+            InitializeComponent();
+        }
+
     }
-  }
 }

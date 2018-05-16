@@ -1,42 +1,64 @@
-﻿using System;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="MenuItemViewModel.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
+
+
+#region Used namespaces
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+
+#endregion
+
 
 namespace AvalonDockMVVM.ViewModel
 {
-  public class MenuItemViewModel : BaseViewModel
-  {
-    #region Properties
-
-    public string Header { get; set; }
-    public bool IsCheckable { get; set; }
-    public List<MenuItemViewModel> Items { get; private set; }
-    public ICommand Command { get; private set; }
-
-    #region IsChecked
-    private bool _IsChecked;
-    public bool IsChecked
+    public class MenuItemViewModel : BaseViewModel
     {
-      get { return _IsChecked; }
-      set
-      {
-        if (_IsChecked != value)
+
+        #region Properties
+
+        public string Header { get; set; }
+
+        public bool IsCheckable { get; set; }
+
+        public List<MenuItemViewModel> Items { get; }
+
+        public ICommand Command { get; private set; }
+
+
+        #region IsChecked
+
+        private bool _IsChecked;
+
+        public bool IsChecked
         {
-          _IsChecked = value;
-          OnPropertyChanged(nameof(IsChecked));
+            get { return _IsChecked; }
+            set
+            {
+                if (_IsChecked != value)
+                {
+                    _IsChecked = value;
+                    OnPropertyChanged(nameof(IsChecked));
+                }
+            }
         }
-      }
-    }
-    #endregion
 
-    #endregion
+        #endregion
 
-    public MenuItemViewModel()
-    {
-      this.Items = new List<MenuItemViewModel>();
+        #endregion
+
+
+        public MenuItemViewModel()
+        {
+            Items = new List<MenuItemViewModel>();
+        }
+
     }
-  }
 }

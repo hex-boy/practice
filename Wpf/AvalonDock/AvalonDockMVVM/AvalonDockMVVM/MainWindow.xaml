@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:AvalonDockMVVM.View"
         xmlns:vm="clr-namespace:AvalonDockMVVM.ViewModel"
         xmlns:av="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
-        xmlns:av_control="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:avControls="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525"
         >
@@ -44,7 +44,7 @@
 
             <av:DockingManager.LayoutItemContainerStyle>
                 <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
-                <Style TargetType="{x:Type av_control:LayoutItem}" >
+                <Style TargetType="{x:Type avControls:LayoutItem}" >
                     <Setter Property="Title" Value="{Binding Model.Title}" />
                     <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                     <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
@@ -53,7 +53,7 @@
             </av:DockingManager.LayoutItemContainerStyle>
             
             <av:DockingManager.DocumentHeaderTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type avControls:LayoutItem}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
                         <TextBlock Text="{Binding Title}" />

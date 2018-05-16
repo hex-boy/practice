@@ -21,44 +21,20 @@ namespace AvalonDockMVVM.ViewModel
     public class MenuViewModel
     {
 
-        public IEnumerable<MenuItemViewModel> Items { get; }
+        public IEnumerable<CheckableMenuItemVm> Items { get; }
 
-        private readonly MenuItemViewModel _viewMenuItemViewModel;
 
         public MenuViewModel(IEnumerable<DockWindowViewModel> dockWindows)
         {
-            var view = _viewMenuItemViewModel = new MenuItemViewModel {Header = "Views"};
+            var view = new CheckableMenuItemVm (header: "Views", isCheckable:false, command: null);
 
             foreach (var dockWindow in dockWindows)
-                view.Items.Add(GetMenuItemViewModel(dockWindow));
+                view.Items.Add(new DocumentMenuItemViewModel(dockWindow));
 
-            var items = new List<MenuItemViewModel>();
-            items.Add(view);
+            var items = new List<CheckableMenuItemVm> {view};
             Items = items;
         }
 
-        private MenuItemViewModel GetMenuItemViewModel(DockWindowViewModel dockWindowViewModel)
-        {
-            var menuItemViewModel = new MenuItemViewModel();
-            menuItemViewModel.IsCheckable = true;
-
-            menuItemViewModel.Header = dockWindowViewModel.Title;
-            menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
-
-            dockWindowViewModel.PropertyChanged += (o, e) =>
-            {
-                if (e.PropertyName == nameof(DockWindowViewModel.IsClosed))
-                    menuItemViewModel.IsChecked = !dockWindowViewModel.IsClosed;
-            };
-
-            menuItemViewModel.PropertyChanged += (o, e) =>
-            {
-                if (e.PropertyName == nameof(MenuItemViewModel.IsChecked))
-                    dockWindowViewModel.IsClosed = !menuItemViewModel.IsChecked;
-            };
-
-            return menuItemViewModel;
-        }
 
     }
 }

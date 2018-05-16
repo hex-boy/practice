@@ -78,7 +78,8 @@
     <Compile Include="ViewModel\DockManagerViewModel.cs" />
     <Compile Include="ViewModel\DockWindowViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="ViewModel\MenuItemViewModel.cs" />
+    <Compile Include="ViewModel\DocumentMenuItemViewModel.cs" />
+    <Compile Include="ViewModel\CheckableMenuItemVm.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\SampleDockWindowViewModel.cs" />
     <Compile Include="View\SampleDockWindowView.xaml.cs">

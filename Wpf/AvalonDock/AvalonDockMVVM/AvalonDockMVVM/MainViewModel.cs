@@ -33,14 +33,14 @@ namespace AvalonDockMVVM
             var documents = new List<DockWindowViewModel>();
 
             for (var i = 0; i < 6; i++)
-                documents.Add(new SampleDockWindowViewModel
-                {
-                    Title = "Sample " + i,
-                    CanClose = i % 2 == 0,
-                    ImageSource = new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png")
-                });
-
+                documents.Add(new SampleDockWindowViewModel(
+                    "Sample " + i,
+                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png"),
+                    false,
+                    i % 2 == 0));
+  
             DockManagerViewModel = new DockManagerViewModel(documents);
+
             MenuViewModel = new MenuViewModel(documents);
         }
 

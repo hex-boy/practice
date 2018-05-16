@@ -22,42 +22,27 @@ namespace AvalonDockMVVM.ViewModel
     public abstract class DockWindowViewModel : BaseViewModel
     {
 
-        #region Properties
-
-        #region CloseCommand
-
-        private ICommand _closeCommand;
-
-        public ICommand CloseCommand
-        {
-            get { return _closeCommand ?? (_closeCommand = new RelayCommand(call => Close())); }
-        }
-
-        #endregion
-
-
-        #region ImageSource
-
-        private Uri _imageSource;
-
-        public Uri ImageSource
-        {
-            get { return _imageSource; }
-            set
-            {
-                if (_imageSource == value)
-                    return;
-                _imageSource = value;
-                OnPropertyChanged(nameof(ImageSource));
-            }
-        }
-
-        #endregion
-
-
-        #region IsClosed
-
         private bool _isClosed;
+        private bool _canClose;
+
+
+        #region CONSTRUCTORs
+
+        protected DockWindowViewModel(string title, Uri imageSource, bool isClosed, bool canClose)
+        {
+            Title = title;
+            ImageSource = imageSource;
+            IsClosed = isClosed;
+            CanClose = canClose;
+            CloseCommand = new RelayCommand(call => Close());
+        }
+
+        #endregion
+
+
+        public string Title { get; }
+
+        public Uri ImageSource { get; }
 
         public bool IsClosed
         {
@@ -67,16 +52,9 @@ namespace AvalonDockMVVM.ViewModel
                 if (_isClosed == value)
                     return;
                 _isClosed = value;
-                OnPropertyChanged(nameof(IsClosed));
+                RaisePropertyChanged(nameof(IsClosed));
             }
         }
-
-        #endregion
-
-
-        #region CanClose
-
-        private bool _canClose;
 
         public bool CanClose
         {
@@ -86,39 +64,13 @@ namespace AvalonDockMVVM.ViewModel
                 if (_canClose == value)
                     return;
                 _canClose = value;
-                OnPropertyChanged(nameof(CanClose));
+                RaisePropertyChanged(nameof(CanClose));
             }
         }
 
-        #endregion
+        public ICommand CloseCommand { get; }
 
 
-        #region Title
-
-        private string _title;
-
-        public string Title
-        {
-            get { return _title; }
-            set
-            {
-                if (_title == value)
-                    return;
-                _title = value;
-                OnPropertyChanged(nameof(Title));
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-
-        public DockWindowViewModel()
-        {
-            CanClose = true;
-            IsClosed = false;
-        }
 
         public void Close()
         {

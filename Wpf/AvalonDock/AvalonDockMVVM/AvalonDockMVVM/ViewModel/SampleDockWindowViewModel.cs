@@ -9,7 +9,15 @@
 #endregion
 
 
+using System;
+
+
 namespace AvalonDockMVVM.ViewModel
 {
-    public class SampleDockWindowViewModel : DockWindowViewModel { }
+    public class SampleDockWindowViewModel : DockWindowViewModel {
+
+        public SampleDockWindowViewModel(string title, Uri imageSource, bool isClosed, bool canClose)
+            : base(title, imageSource, isClosed, canClose) { }
+
+    }
 }

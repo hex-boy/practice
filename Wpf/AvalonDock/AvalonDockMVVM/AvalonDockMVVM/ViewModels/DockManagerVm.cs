@@ -28,12 +28,12 @@ namespace AvalonDockMVVM.ViewModels
         /// <summary>Gets a collection of all visible documents</summary>
         public ObservableCollection<LayoutItemVm> Documents { get; }
 
-        public ObservableCollection<object> Anchorables { get; }
+        public ObservableCollection<AnchorableLayoutItemVm> Anchorables { get; }
 
         public DockManagerVm(IEnumerable<LayoutItemVm> dockWindowVms, IEnumerable<AnchorableLayoutItemVm> anchorableVms)
         {
             Documents = new ObservableCollection<LayoutItemVm>();
-            Anchorables = new ObservableCollection<object>();
+            Anchorables = new ObservableCollection<AnchorableLayoutItemVm>();
 
             foreach (var document in dockWindowVms)
             {

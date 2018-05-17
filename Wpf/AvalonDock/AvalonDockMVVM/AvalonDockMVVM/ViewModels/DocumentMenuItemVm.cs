@@ -1,7 +1,25 @@
-﻿using System.ComponentModel;
+﻿#region Copyright
+
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright company="Siemens AG" file="DocumentMenuItemVm.cs">
+//   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+#endregion
 
 
-namespace AvalonDockMVVM.ViewModel {
+#region Used namespaces
+
+using System.ComponentModel;
+
+using AvalonDockMVVM.ViewModels.Core;
+
+#endregion
+
+
+namespace AvalonDockMVVM.ViewModels
+{
     public class DocumentMenuItemVm : CheckableMenuItemVm
     {
 

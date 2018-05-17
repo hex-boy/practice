@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="DockWindowViewModel.cs">
+// <copyright company="Siemens AG" file="LayoutItemVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ using System.Windows.Input;
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.ViewModels.Core
 {
     public abstract class LayoutItemVm : BaseVm
     {
@@ -69,8 +69,6 @@ namespace AvalonDockMVVM.ViewModel
         }
 
         public ICommand CloseCommand { get; }
-
-
 
         public void Close()
         {

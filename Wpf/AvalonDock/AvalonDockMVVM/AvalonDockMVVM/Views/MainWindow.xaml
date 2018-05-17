@@ -1,17 +1,16 @@
-﻿<Window x:Class="AvalonDockMVVM.MainWindow"
+﻿<Window x:Class="AvalonDockMVVM.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:AvalonDockMVVM.View"
-        xmlns:local="clr-namespace:AvalonDockMVVM"
-        xmlns:vm="clr-namespace:AvalonDockMVVM.ViewModel"
         xmlns:av="clr-namespace:Xceed.Wpf.AvalonDock;assembly=Xceed.Wpf.AvalonDock"
         xmlns:avControls="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         xmlns:avLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:vm="clr-namespace:AvalonDockMVVM.ViewModels"
+        xmlns:views="clr-namespace:AvalonDockMVVM.Views"
         mc:Ignorable="d"
         Title="MainWindow" Width="1024" Height="768"
-        d:DataContext="{Binding Source={d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}}"
+        d:DataContext="{Binding Source={d:DesignInstance Type=vm:MainWindowVm, IsDesignTimeCreatable=True}}"
         >
     <Window.Resources>
         <DataTemplate x:Key="LayoutItemHeaderTemplate" DataType="{x:Type avControls:LayoutItem}">
@@ -74,12 +73,12 @@
             </av:DockingManager.Resources>
 
             <av:DockingManager.LayoutItemContainerStyleSelector>
-                <local:LayoutItemStyleSelector DocumentStyle="{StaticResource DocumentLayoutItemStyle}"
+                <views:LayoutItemStyleSelector DocumentStyle="{StaticResource DocumentLayoutItemStyle}"
                                                AnchorableStyle="{StaticResource AnchorableLayoutItemStyle}" />
             </av:DockingManager.LayoutItemContainerStyleSelector>
             
             <av:DockingManager.LayoutItemTemplateSelector>
-                <local:LayoutItemTemplateSelector DocumentLayoutItemContentTemplate="{StaticResource SampleDocumentTemplate}"
+                <views:LayoutItemTemplateSelector DocumentLayoutItemContentTemplate="{StaticResource SampleDocumentTemplate}"
                                                   AnchorableLayoutItemContentTemplate="{StaticResource SampleAnchorableTemplate}" />
             </av:DockingManager.LayoutItemTemplateSelector>
             

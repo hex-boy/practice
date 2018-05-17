@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="MainViewModel.cs">
+// <copyright company="Siemens AG" file="MainWindowVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,44 +14,45 @@
 using System;
 using System.Collections.Generic;
 
-using AvalonDockMVVM.ViewModel;
+using AvalonDockMVVM.ViewModels.Core;
 
 #endregion
 
 
-namespace AvalonDockMVVM
+namespace AvalonDockMVVM.ViewModels
 {
-    public class MainViewModel
+    public class MainWindowVm
     {
 
         public DockManagerVm DockManagerViewModel { get; }
 
         public MenuViewModel MenuViewModel { get; }
 
-        public MainViewModel()
+        public MainWindowVm()
         {
             var documents = new List<LayoutItemVm>();
 
             for (var i = 0; i < 6; i++)
-                documents.Add(new SampleDocumentVm(
-                    "Document 0" + i,
-                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png"),
-                    false,
-                    i % 2 == 0) {ContentText = $"Document - 0{i}"});
-  
+                documents.Add(
+                    new SampleDocumentVm(
+                        "Document 0" + i,
+                        new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png"),
+                        false,
+                        i % 2 == 0) {ContentText = $"Document - 0{i}"});
+
             var anchorables = new List<AnchorableLayoutItemVm>
             {
                 new SampleAnchorableVm(
                     "Anchorable 01",
                     new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"),
                     false,
-                    false, false) {SomeContentText = "Anchorable - 01"} ,
+                    false, canHide: false) {SomeContentText = "Anchorable - 01"},
 
                 new SampleAnchorableVm(
                     "Anchorable 02",
                     new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"),
                     false,
-                    false, false) {SomeContentText = "Anchorable - 02"}
+                    false, canHide:true) {SomeContentText = "Anchorable - 02"}
             };
 
             DockManagerViewModel = new DockManagerVm(documents, anchorables);

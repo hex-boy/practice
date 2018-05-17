@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="DockManagerViewModel.cs">
+// <copyright company="Siemens AG" file="DockManagerVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,16 +11,16 @@
 
 #region Used namespaces
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
+
+using AvalonDockMVVM.ViewModels.Core;
 
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.ViewModels
 {
     public class DockManagerVm
     {

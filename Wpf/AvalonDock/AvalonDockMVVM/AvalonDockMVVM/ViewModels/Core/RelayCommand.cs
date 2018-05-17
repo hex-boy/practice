@@ -17,7 +17,7 @@ using System.Windows.Input;
 #endregion
 
 
-namespace AvalonDockMVVM
+namespace AvalonDockMVVM.ViewModels.Core
 {
     public class RelayCommand : ICommand
     {

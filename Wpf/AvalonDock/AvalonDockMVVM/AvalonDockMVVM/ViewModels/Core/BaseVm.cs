@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="BaseViewModel.cs">
+// <copyright company="Siemens AG" file="BaseVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ using System.ComponentModel;
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.ViewModels.Core
 {
     public abstract class BaseVm : INotifyPropertyChanged
     {

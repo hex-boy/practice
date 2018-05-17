@@ -13,20 +13,21 @@
 
 using System.Collections.Generic;
 
+using AvalonDockMVVM.ViewModels.Core;
+
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.ViewModels
 {
     public class MenuViewModel
     {
 
         public IEnumerable<CheckableMenuItemVm> Items { get; }
 
-
         public MenuViewModel(IEnumerable<LayoutItemVm> dockWindows)
         {
-            var view = new CheckableMenuItemVm (header: "Views", isCheckable:false, command: null);
+            var view = new CheckableMenuItemVm(header: "Views", isCheckable: false, command: null);
 
             foreach (var dockWindow in dockWindows)
                 view.Items.Add(new DocumentMenuItemVm(dockWindow));
@@ -34,7 +35,6 @@ namespace AvalonDockMVVM.ViewModel
             var items = new List<CheckableMenuItemVm> {view};
             Items = items;
         }
-
 
     }
 }

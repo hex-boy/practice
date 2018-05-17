@@ -13,6 +13,8 @@
 
 using System.Windows;
 
+using AvalonDockMVVM.ViewModels;
+
 #endregion
 
 
@@ -21,15 +23,15 @@ namespace AvalonDockMVVM
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
+            MainWindow = new Views.MainWindow();
             MainWindow.Show();
 
-            MainWindow.DataContext = new MainViewModel();
+            MainWindow.DataContext = new MainWindowVm();
         }
 
     }

@@ -14,12 +14,12 @@
 using System.Windows;
 using System.Windows.Controls;
 
-using AvalonDockMVVM.ViewModel;
+using AvalonDockMVVM.ViewModels;
 
 #endregion
 
 
-namespace AvalonDockMVVM
+namespace AvalonDockMVVM.Views
 {
     public class LayoutItemTemplateSelector : DataTemplateSelector
     {

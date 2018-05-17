@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="MainWindow.xaml.cs">
+// <copyright company="Siemens AG" file="SampleDockWindowView.xaml.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,20 +11,18 @@
 
 #region Used namespaces
 
-using System.Windows;
-
 #endregion
 
 
-namespace AvalonDockMVVM
+namespace AvalonDockMVVM.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SampleDockWindowView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SampleDockWindowView
     {
 
-        public MainWindow()
+        public SampleDockWindowView()
         {
             InitializeComponent();
         }

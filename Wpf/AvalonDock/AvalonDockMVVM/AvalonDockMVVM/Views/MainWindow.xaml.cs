@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="AnchorableLayoutItemVm.cs">
+// <copyright company="Siemens AG" file="MainWindow.xaml.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,25 +11,23 @@
 
 #region Used namespaces
 
-using System;
+using System.Windows;
 
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.Views
 {
-    public class AnchorableLayoutItemVm : LayoutItemVm
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
 
-
-        public AnchorableLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose, bool canHide)
-            : base(title, imageSource, isClosed, canClose)
+        public MainWindow()
         {
-            CanHide = canHide;
+            InitializeComponent();
         }
-
-
-        public bool CanHide { get; }
 
     }
 }

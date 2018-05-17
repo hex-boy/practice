@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="MenuItemViewModel.cs">
+// <copyright company="Siemens AG" file="CheckableMenuItemVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,10 +14,12 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 
+using AvalonDockMVVM.ViewModels.Core;
+
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModel
+namespace AvalonDockMVVM.ViewModels
 {
     public class CheckableMenuItemVm : BaseVm
     {

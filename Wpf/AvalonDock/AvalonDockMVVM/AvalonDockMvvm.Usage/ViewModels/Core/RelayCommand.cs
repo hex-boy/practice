@@ -24,8 +24,8 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core
 
         #region Properties
 
-        private readonly Action<object> ExecuteAction;
-        private readonly Predicate<object> CanExecuteAction;
+        private readonly Action<object> _executeAction;
+        private readonly Predicate<object> _canExecuteAction;
 
         #endregion
 
@@ -35,8 +35,8 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core
 
         public RelayCommand(Action<object> action, Predicate<object> canExecute)
         {
-            ExecuteAction = action;
-            CanExecuteAction = canExecute;
+            _executeAction = action;
+            _canExecuteAction = canExecute;
         }
 
 
@@ -44,7 +44,7 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core
 
         public bool CanExecute(object parameter)
         {
-            return CanExecuteAction(parameter);
+            return _canExecuteAction(parameter);
         }
 
         public event EventHandler CanExecuteChanged
@@ -55,7 +55,7 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core
 
         public void Execute(object parameter)
         {
-            ExecuteAction(parameter);
+            _executeAction(parameter);
         }
 
         #endregion

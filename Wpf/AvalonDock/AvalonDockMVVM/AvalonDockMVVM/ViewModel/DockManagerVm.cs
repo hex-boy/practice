@@ -11,41 +11,48 @@
 
 #region Used namespaces
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 
 #endregion
 
 
 namespace AvalonDockMVVM.ViewModel
 {
-    public class DockManagerViewModel
+    public class DockManagerVm
     {
 
         /// <summary>Gets a collection of all visible documents</summary>
-        public ObservableCollection<DockWindowViewModel> Documents { get; }
+        public ObservableCollection<LayoutItemVm> Documents { get; }
 
         public ObservableCollection<object> Anchorables { get; }
 
-        public DockManagerViewModel(IEnumerable<DockWindowViewModel> dockWindowViewModels)
+        public DockManagerVm(IEnumerable<LayoutItemVm> dockWindowVms, IEnumerable<AnchorableLayoutItemVm> anchorableVms)
         {
-            Documents = new ObservableCollection<DockWindowViewModel>();
+            Documents = new ObservableCollection<LayoutItemVm>();
             Anchorables = new ObservableCollection<object>();
 
-            foreach (var document in dockWindowViewModels)
+            foreach (var document in dockWindowVms)
             {
                 document.PropertyChanged += DockWindowViewModel_PropertyChanged;
                 if (!document.IsClosed)
                     Documents.Add(document);
             }
+
+            foreach (var anchorableLayoutItemVm in anchorableVms)
+            {
+                Anchorables.Add(anchorableLayoutItemVm);
+            }
         }
 
         private void DockWindowViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var document = sender as DockWindowViewModel;
+            var document = sender as LayoutItemVm;
 
-            if (e.PropertyName == nameof(DockWindowViewModel.IsClosed))
+            if (e.PropertyName == nameof(LayoutItemVm.IsClosed))
             {
                 if (!document.IsClosed)
                     Documents.Add(document);

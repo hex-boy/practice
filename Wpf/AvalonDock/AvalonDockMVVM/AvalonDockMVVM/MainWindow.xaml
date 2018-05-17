@@ -38,8 +38,11 @@
             <av:DockingManager.Resources>
 
                 <!-- add views for specific ViewModels -->
-                <DataTemplate DataType="{x:Type vm:SampleDockWindowViewModel}">
-                    <views:SampleDockWindowView />
+                <DataTemplate DataType="{x:Type vm:SampleDocumentVm}">
+                    <views:SampleDockWindowView DataContext="{Binding ContentText}" />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SampleAnchorableVm}">
+                    <views:SampleDockWindowView DataContext="{Binding SomeContentText}" />
                 </DataTemplate>
 
             </av:DockingManager.Resources>
@@ -53,7 +56,7 @@
                     <Setter Property="IconSource" Value="{Binding Model.ImageSource}" />
                 </Style>
             </av:DockingManager.LayoutItemContainerStyle>
-            
+
             <av:DockingManager.DocumentHeaderTemplate>
                 <DataTemplate DataType="{x:Type avControls:LayoutItem}">
                     <StackPanel Orientation="Horizontal">
@@ -62,6 +65,16 @@
                     </StackPanel>
                 </DataTemplate>
             </av:DockingManager.DocumentHeaderTemplate>
+
+            <av:DockingManager.AnchorableTitleTemplate>
+                <DataTemplate DataType="{x:Type avControls:LayoutItem}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                        <TextBlock Text="{Binding Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </av:DockingManager.AnchorableTitleTemplate>
+            
         </av:DockingManager>
     </Grid>
 </Window>

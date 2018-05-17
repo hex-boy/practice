@@ -18,7 +18,7 @@ using System.ComponentModel;
 
 namespace AvalonDockMVVM.ViewModel
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseVm : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

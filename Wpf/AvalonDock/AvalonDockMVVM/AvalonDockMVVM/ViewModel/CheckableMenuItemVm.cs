@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace AvalonDockMVVM.ViewModel
 {
-    public class CheckableMenuItemVm : BaseViewModel
+    public class CheckableMenuItemVm : BaseVm
     {
 
         private bool _isChecked;
@@ -47,7 +47,7 @@ namespace AvalonDockMVVM.ViewModel
         public bool IsChecked
         {
             get { return _isChecked; }
-            protected set
+            set
             {
                 if (_isChecked == value)
                     return;

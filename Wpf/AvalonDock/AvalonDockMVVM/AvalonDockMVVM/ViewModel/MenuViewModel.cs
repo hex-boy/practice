@@ -24,12 +24,12 @@ namespace AvalonDockMVVM.ViewModel
         public IEnumerable<CheckableMenuItemVm> Items { get; }
 
 
-        public MenuViewModel(IEnumerable<DockWindowViewModel> dockWindows)
+        public MenuViewModel(IEnumerable<LayoutItemVm> dockWindows)
         {
             var view = new CheckableMenuItemVm (header: "Views", isCheckable:false, command: null);
 
             foreach (var dockWindow in dockWindows)
-                view.Items.Add(new DocumentMenuItemViewModel(dockWindow));
+                view.Items.Add(new DocumentMenuItemVm(dockWindow));
 
             var items = new List<CheckableMenuItemVm> {view};
             Items = items;

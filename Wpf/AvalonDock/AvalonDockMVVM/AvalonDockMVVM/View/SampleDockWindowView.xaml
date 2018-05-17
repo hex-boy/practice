@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
   <Grid>
-    <Label Content="This is a sample view"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Label Content="{Binding}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
   </Grid>
 </UserControl>

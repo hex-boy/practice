@@ -2,15 +2,15 @@
 
 
 namespace AvalonDockMVVM.ViewModel {
-    public class DocumentMenuItemViewModel : CheckableMenuItemVm
+    public class DocumentMenuItemVm : CheckableMenuItemVm
     {
 
-        private readonly DockWindowViewModel _dockWindowVm;
+        private readonly LayoutItemVm _dockWindowVm;
 
 
         #region CONSTRUCTORs
 
-        public DocumentMenuItemViewModel(DockWindowViewModel dockWindowVm)
+        public DocumentMenuItemVm(LayoutItemVm dockWindowVm)
             : base(dockWindowVm.Title, true, null)
         {
             dockWindowVm.PropertyChanged += DockWindowVm_PropertyChanged;
@@ -39,7 +39,7 @@ namespace AvalonDockMVVM.ViewModel {
 
         private void DockWindowVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(DockWindowViewModel.IsClosed))
+            if (e.PropertyName == nameof(LayoutItemVm.IsClosed))
                 UpdateIsChecked();
         }
 

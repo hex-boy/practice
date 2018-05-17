@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace AvalonDockMVVM.ViewModel
 {
-    public abstract class DockWindowViewModel : BaseViewModel
+    public abstract class LayoutItemVm : BaseVm
     {
 
         private bool _isClosed;
@@ -28,7 +28,7 @@ namespace AvalonDockMVVM.ViewModel
 
         #region CONSTRUCTORs
 
-        protected DockWindowViewModel(string title, Uri imageSource, bool isClosed, bool canClose)
+        protected LayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
         {
             Title = title;
             ImageSource = imageSource;

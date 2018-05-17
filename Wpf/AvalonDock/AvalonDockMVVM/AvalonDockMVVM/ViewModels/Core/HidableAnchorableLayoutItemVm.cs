@@ -19,15 +19,36 @@ using System.Windows.Input;
 
 namespace AvalonDockMVVM.ViewModels.Core
 {
-    public class AnchorableLayoutItemVm : LayoutItemVm
+    public class HidableAnchorableLayoutItemVm : AnchorableLayoutItemVm
     {
 
+        private bool _isVisible;
 
-        public AnchorableLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
+
+        public HidableAnchorableLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
             : base(title, imageSource, isClosed, canClose)
         {
-
+            HideCommand = new RelayCommand(call => Hide());
+            IsVisible = true;
         }
 
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value;
+                RaisePropertyChanged(nameof(IsVisible));
+            }
+        }
+
+        public ICommand HideCommand { get; }
+
+
+        private void Hide()
+        {
+            IsVisible = false;
+        }
     }
 }

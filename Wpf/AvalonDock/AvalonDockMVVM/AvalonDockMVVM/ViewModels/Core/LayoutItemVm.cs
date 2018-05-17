@@ -56,17 +56,7 @@ namespace AvalonDockMVVM.ViewModels.Core
             }
         }
 
-        public bool CanClose
-        {
-            get { return _canClose; }
-            set
-            {
-                if (_canClose == value)
-                    return;
-                _canClose = value;
-                RaisePropertyChanged(nameof(CanClose));
-            }
-        }
+        public bool CanClose { get; }
 
         public ICommand CloseCommand { get; }
 

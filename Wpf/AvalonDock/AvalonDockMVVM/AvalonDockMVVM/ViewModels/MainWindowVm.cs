@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 
 using AvalonDockMVVM.ViewModels.Core;
+using AvalonDockMVVM.ViewModels.Menu;
 
 #endregion
 
@@ -26,7 +27,7 @@ namespace AvalonDockMVVM.ViewModels
 
         public DockManagerVm DockManagerViewModel { get; }
 
-        public MenuViewModel MenuViewModel { get; }
+        public MenuVm MenuViewModel { get; }
 
         public MainWindowVm()
         {
@@ -40,24 +41,33 @@ namespace AvalonDockMVVM.ViewModels
                         false,
                         i % 2 == 0) {ContentText = $"Document - 0{i}"});
 
-            var anchorables = new List<AnchorableLayoutItemVm>
+            var hidableAnchorables = new List<HidableAnchorableLayoutItemVm>
             {
-                new SampleAnchorableVm(
-                    "Anchorable 01",
+                new SampleHidableAnchorableVm(
+                    "Hid Anchorable 01",
                     new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"),
                     false,
-                    false, canHide: false) {SomeContentText = "Anchorable - 01"},
+                    false) {SomeHidableContentText = "Hidable Anchorable - 01"},
 
-                new SampleAnchorableVm(
-                    "Anchorable 02",
-                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"),
+                new SampleHidableAnchorableVm(
+                    "Hid Anchorable 02",
+                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"),
                     false,
-                    false, canHide:true) {SomeContentText = "Anchorable - 02"}
+                    false) {SomeHidableContentText = "Hidable Anchorable - 02"}
             };
 
-            DockManagerViewModel = new DockManagerVm(documents, anchorables);
+            var sampleAnchorableVm = new SampleAnchorableVm(
+                "Anchorable 01",
+                new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"),
+                false,
+                false)
+            {
+                SomeContentText = "Anchorable - 01"
+            };
 
-            MenuViewModel = new MenuViewModel(documents);
+            DockManagerViewModel = new DockManagerVm(documents, new[] { sampleAnchorableVm }, hidableAnchorables);
+
+            MenuViewModel = new MenuVm(documents, hidableAnchorables);
         }
 
     }

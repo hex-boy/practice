@@ -19,7 +19,7 @@ using AvalonDockMVVM.ViewModels.Core;
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels
+namespace AvalonDockMVVM.ViewModels.Menu
 {
     public class CheckableMenuItemVm : BaseVm
     {

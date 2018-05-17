@@ -8,6 +8,8 @@
         xmlns:avLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
         xmlns:vm="clr-namespace:AvalonDockMVVM.ViewModels"
         xmlns:views="clr-namespace:AvalonDockMVVM.Views"
+        xmlns:menu="clr-namespace:AvalonDockMVVM.ViewModels.Menu"
+        xmlns:converter="clr-namespace:AvalonDockMVVM.Converter"
         mc:Ignorable="d"
         Title="MainWindow" Width="1024" Height="768"
         d:DataContext="{Binding Source={d:DesignInstance Type=vm:MainWindowVm, IsDesignTimeCreatable=True}}"
@@ -35,7 +37,7 @@
                     <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
                     <Setter Property="IsChecked" Value="{Binding IsChecked}" />
                 </Style>
-                <HierarchicalDataTemplate DataType="{x:Type vm:CheckableMenuItemVm}" ItemsSource="{Binding Items}" />
+                <HierarchicalDataTemplate DataType="{x:Type menu:CheckableMenuItemVm}" ItemsSource="{Binding Items}" />
             </Menu.Resources>
         </Menu>
 
@@ -47,21 +49,30 @@
                            AnchorableTitleTemplate="{StaticResource LayoutItemHeaderTemplate}">
                          
             <av:DockingManager.Resources>
-
+                
+                <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" FalseValueVisibility="Hidden" />
+                
                 <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
                 <Style x:Key="DocumentLayoutItemStyle" 
                        TargetType="{x:Type avControls:LayoutItem}" >
                     <Setter Property="Title" Value="{Binding Model.Title}" />
+                    <Setter Property="IconSource" Value="{Binding Model.ImageSource}" />
                     <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                     <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
-                    <Setter Property="IconSource" Value="{Binding Model.ImageSource}" />
                 </Style>
                 <Style x:Key="AnchorableLayoutItemStyle" 
                        TargetType="{x:Type avControls:LayoutAnchorableItem}" 
                        BasedOn="{StaticResource DocumentLayoutItemStyle}" >
-                    <Setter Property="CanHide" Value="{Binding Model.CanHide}" />
+                    <Setter Property="CanHide" Value="False" />
                 </Style>
-                
+                <Style x:Key="HidableAnchorableLayoutItemStyle" 
+                       TargetType="{x:Type avControls:LayoutAnchorableItem}" 
+                       BasedOn="{StaticResource DocumentLayoutItemStyle}" >
+                    <Setter Property="CanHide" Value="True" />
+                    <Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <Setter Property="HideCommand" Value="{Binding Model.HideCommand}" />
+                </Style>
+
                 <!-- add views for specific ViewModels -->
                 <DataTemplate x:Key="SampleDocumentTemplate" DataType="{x:Type vm:SampleDocumentVm}">
                     <views:SampleDockWindowView DataContext="{Binding ContentText}" />
@@ -69,17 +80,22 @@
                 <DataTemplate x:Key="SampleAnchorableTemplate" DataType="{x:Type vm:SampleAnchorableVm}">
                     <views:SampleDockWindowView DataContext="{Binding SomeContentText}" />
                 </DataTemplate>
+                <DataTemplate x:Key="SampleHidableAnchorableTemplate" DataType="{x:Type vm:SampleHidableAnchorableVm}">
+                    <views:SampleDockWindowView DataContext="{Binding SomeHidableContentText}" />
+                </DataTemplate>
 
             </av:DockingManager.Resources>
 
             <av:DockingManager.LayoutItemContainerStyleSelector>
                 <views:LayoutItemStyleSelector DocumentStyle="{StaticResource DocumentLayoutItemStyle}"
-                                               AnchorableStyle="{StaticResource AnchorableLayoutItemStyle}" />
+                                               AnchorableStyle="{StaticResource AnchorableLayoutItemStyle}"
+                                               HidableAnchorableStyle="{StaticResource HidableAnchorableLayoutItemStyle}"/>
             </av:DockingManager.LayoutItemContainerStyleSelector>
             
             <av:DockingManager.LayoutItemTemplateSelector>
                 <views:LayoutItemTemplateSelector DocumentLayoutItemContentTemplate="{StaticResource SampleDocumentTemplate}"
-                                                  AnchorableLayoutItemContentTemplate="{StaticResource SampleAnchorableTemplate}" />
+                                                  AnchorableLayoutItemContentTemplate="{StaticResource SampleAnchorableTemplate}"
+                                                  HidableAnchorableLayoutItemContentTemplate="{StaticResource SampleHidableAnchorableTemplate}"/>
             </av:DockingManager.LayoutItemTemplateSelector>
             
             <avLayout:LayoutRoot>

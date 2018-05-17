@@ -28,6 +28,9 @@ namespace AvalonDockMVVM.Views
 
         public Style AnchorableStyle { get; set; }
 
+        public Style HidableAnchorableStyle { get; set; }
+
+
         public override Style SelectStyle(object item, DependencyObject container)
         {
             if (item is SampleDocumentVm)
@@ -35,6 +38,9 @@ namespace AvalonDockMVVM.Views
 
             if (item is SampleAnchorableVm)
                 return AnchorableStyle;
+
+            if (item is SampleHidableAnchorableVm)
+                return HidableAnchorableStyle;
 
             return base.SelectStyle(item, container);
         }

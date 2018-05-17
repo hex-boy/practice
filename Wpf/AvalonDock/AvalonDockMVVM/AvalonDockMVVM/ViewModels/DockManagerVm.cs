@@ -30,35 +30,52 @@ namespace AvalonDockMVVM.ViewModels
 
         public ObservableCollection<AnchorableLayoutItemVm> Anchorables { get; }
 
-        public DockManagerVm(IEnumerable<LayoutItemVm> dockWindowVms, IEnumerable<AnchorableLayoutItemVm> anchorableVms)
+
+        #region CONSTRUCTORs
+
+        public DockManagerVm(IEnumerable<LayoutItemVm> dockWindowVms, IEnumerable<AnchorableLayoutItemVm> anchorableVms, IEnumerable<HidableAnchorableLayoutItemVm> hidableAnchorableVms)
         {
             Documents = new ObservableCollection<LayoutItemVm>();
             Anchorables = new ObservableCollection<AnchorableLayoutItemVm>();
 
             foreach (var document in dockWindowVms)
             {
-                document.PropertyChanged += DockWindowViewModel_PropertyChanged;
-                if (!document.IsClosed)
-                    Documents.Add(document);
+                document.PropertyChanged += DocumentLayoutItemVm_PropertyChanged;
+                AddRemoveLayoutItemVm(Documents, document, document.IsClosed);
             }
 
-            foreach (var anchorableLayoutItemVm in anchorableVms)
+            foreach (var anchorableVm in anchorableVms)
             {
-                Anchorables.Add(anchorableLayoutItemVm);
+                AddRemoveLayoutItemVm(Anchorables, anchorableVm, false);
+            }
+
+            foreach (var anchorableVm in hidableAnchorableVms)
+            {
+                AddRemoveLayoutItemVm(Anchorables, anchorableVm, false);
             }
         }
 
-        private void DockWindowViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        #endregion
+
+
+        private void DocumentLayoutItemVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var document = sender as LayoutItemVm;
+            var senderLocal = sender as LayoutItemVm;
 
             if (e.PropertyName == nameof(LayoutItemVm.IsClosed))
             {
-                if (!document.IsClosed)
-                    Documents.Add(document);
-                else
-                    Documents.Remove(document);
+                AddRemoveLayoutItemVm(Documents, senderLocal, senderLocal.IsClosed);
             }
+        }
+
+        private void AddRemoveLayoutItemVm<T>(ObservableCollection<T> collection, T item, bool doRemove)
+            where T : LayoutItemVm
+        {
+            if (!doRemove)
+                collection.Add(item);
+            else
+                if (collection.Contains(item))
+                    collection.Remove(item);
         }
 
     }

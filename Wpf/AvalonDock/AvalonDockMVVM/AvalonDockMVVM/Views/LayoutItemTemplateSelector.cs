@@ -28,6 +28,9 @@ namespace AvalonDockMVVM.Views
 
         public DataTemplate AnchorableLayoutItemContentTemplate { get; set; }
 
+        public DataTemplate HidableAnchorableLayoutItemContentTemplate { get; set; }
+
+
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item is SampleDocumentVm)
@@ -35,6 +38,9 @@ namespace AvalonDockMVVM.Views
 
             if (item is SampleAnchorableVm)
                 return AnchorableLayoutItemContentTemplate;
+
+            if (item is SampleHidableAnchorableVm)
+                return HidableAnchorableLayoutItemContentTemplate;
 
             return base.SelectTemplate(item, container);
         }

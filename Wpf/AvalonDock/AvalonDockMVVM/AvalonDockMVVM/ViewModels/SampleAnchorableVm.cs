@@ -25,8 +25,8 @@ namespace AvalonDockMVVM.ViewModels
 
         private string _someContentText;
 
-        public SampleAnchorableVm(string title, Uri imageSource, bool isClosed, bool canClose, bool canHide)
-            : base(title, imageSource, isClosed, canClose, canHide) { }
+        public SampleAnchorableVm(string title, Uri imageSource, bool isClosed, bool canClose)
+            : base(title, imageSource, isClosed, canClose) { }
 
         public string SomeContentText
         {

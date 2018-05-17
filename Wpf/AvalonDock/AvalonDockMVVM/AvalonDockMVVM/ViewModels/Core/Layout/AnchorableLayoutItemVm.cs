@@ -12,22 +12,17 @@
 #region Used namespaces
 
 using System;
-using System.Windows.Input;
 
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels.Core
+namespace AvalonDockMVVM.ViewModels.Core.Layout
 {
-    public class AnchorableLayoutItemVm : LayoutItemVm
+    public abstract class AnchorableLayoutItemVm : LayoutItemVm
     {
 
-
-        public AnchorableLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
-            : base(title, imageSource, isClosed, canClose)
-        {
-
-        }
+        protected AnchorableLayoutItemVm(string title, Uri imageSource)
+            : base(title, imageSource) { }
 
     }
 }

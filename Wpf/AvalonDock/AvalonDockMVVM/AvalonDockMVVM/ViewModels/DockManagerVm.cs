@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-using AvalonDockMVVM.ViewModels.Core;
+using AvalonDockMVVM.ViewModels.Core.Layout;
 
 #endregion
 
@@ -33,25 +33,21 @@ namespace AvalonDockMVVM.ViewModels
 
         #region CONSTRUCTORs
 
-        public DockManagerVm(IEnumerable<LayoutItemVm> dockWindowVms, IEnumerable<AnchorableLayoutItemVm> anchorableVms, IEnumerable<HidableAnchorableLayoutItemVm> hidableAnchorableVms)
+        public DockManagerVm(
+            IEnumerable<DocumentLayoutItemVm> docLayoutVms,
+            IEnumerable<AnchorableLayoutItemVm> anchorableVms)
         {
             Documents = new ObservableCollection<LayoutItemVm>();
-            Anchorables = new ObservableCollection<AnchorableLayoutItemVm>();
-
-            foreach (var document in dockWindowVms)
+            foreach (var document in docLayoutVms)
             {
                 document.PropertyChanged += DocumentLayoutItemVm_PropertyChanged;
                 AddRemoveLayoutItemVm(Documents, document, document.IsClosed);
             }
 
-            foreach (var anchorableVm in anchorableVms)
+            Anchorables = new ObservableCollection<AnchorableLayoutItemVm>();
+            foreach (var anchorableLayoutItemVm in anchorableVms)
             {
-                AddRemoveLayoutItemVm(Anchorables, anchorableVm, false);
-            }
-
-            foreach (var anchorableVm in hidableAnchorableVms)
-            {
-                AddRemoveLayoutItemVm(Anchorables, anchorableVm, false);
+                Anchorables.Add(anchorableLayoutItemVm);
             }
         }
 
@@ -60,9 +56,9 @@ namespace AvalonDockMVVM.ViewModels
 
         private void DocumentLayoutItemVm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var senderLocal = sender as LayoutItemVm;
+            var senderLocal = sender as DocumentLayoutItemVm;
 
-            if (e.PropertyName == nameof(LayoutItemVm.IsClosed))
+            if (e.PropertyName == nameof(DocumentLayoutItemVm.IsClosed))
             {
                 AddRemoveLayoutItemVm(Documents, senderLocal, senderLocal.IsClosed);
             }

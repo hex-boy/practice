@@ -74,21 +74,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
-    <Compile Include="ViewModels\Core\HidableAnchorableLayoutItemVm.cs" />
-    <Compile Include="ViewModels\Core\DocumentLayoutItemVm.cs" />
-    <Compile Include="ViewModels\Menu\HidableAnchorableMenuItemVm.cs" />
-    <Compile Include="ViewModels\Menu\DocumentMenuItemVm.cs" />
+    <Compile Include="ViewModels\Core\Layout\HidableAnchorableLayoutItemVm.cs" />
+    <Compile Include="ViewModels\Core\Layout\DocumentLayoutItemVm.cs" />
+    <Compile Include="ViewModels\Core\Menu\CheckedUpdater.cs" />
+    <Compile Include="ViewModels\Core\Menu\HidableAnchorableMenuItemVm.cs" />
+    <Compile Include="ViewModels\Core\Menu\DocumentMenuItemVm.cs" />
     <Compile Include="ViewModels\SampleHidableAnchorableVm.cs" />
     <Compile Include="Views\LayoutItemStyleSelector.cs" />
     <Compile Include="Views\LayoutItemTemplateSelector.cs" />
-    <Compile Include="ViewModels\Core\AnchorableLayoutItemVm.cs" />
+    <Compile Include="ViewModels\Core\Layout\AnchorableLayoutItemVm.cs" />
     <Compile Include="ViewModels\Core\BaseVm.cs" />
     <Compile Include="ViewModels\Core\RelayCommand.cs" />
     <Compile Include="ViewModels\DockManagerVm.cs" />
-    <Compile Include="ViewModels\Core\LayoutItemVm.cs" />
+    <Compile Include="ViewModels\Core\Layout\LayoutItemVm.cs" />
     <Compile Include="ViewModels\MainWindowVm.cs" />
-    <Compile Include="ViewModels\Menu\CheckableMenuItemVm.cs" />
-    <Compile Include="ViewModels\Menu\MenuVm.cs" />
+    <Compile Include="ViewModels\Core\Menu\CheckableMenuItemVm.cs" />
+    <Compile Include="ViewModels\Core\Menu\MenuVm.cs" />
     <Compile Include="ViewModels\SampleAnchorableVm.cs" />
     <Compile Include="ViewModels\SampleDocumentVm.cs" />
     <Compile Include="Views\SampleDockWindowView.xaml.cs">

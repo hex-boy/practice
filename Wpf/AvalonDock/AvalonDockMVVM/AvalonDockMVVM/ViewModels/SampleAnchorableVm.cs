@@ -13,7 +13,7 @@
 
 using System;
 
-using AvalonDockMVVM.ViewModels.Core;
+using AvalonDockMVVM.ViewModels.Core.Layout;
 
 #endregion
 
@@ -25,8 +25,8 @@ namespace AvalonDockMVVM.ViewModels
 
         private string _someContentText;
 
-        public SampleAnchorableVm(string title, Uri imageSource, bool isClosed, bool canClose)
-            : base(title, imageSource, isClosed, canClose) { }
+        public SampleAnchorableVm(string title, Uri imageSource)
+            : base(title, imageSource) { }
 
         public string SomeContentText
         {

@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="LayoutItemVm.cs">
+// <copyright company="Siemens AG" file="DocumentLayoutItemVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -17,21 +17,19 @@ using System.Windows.Input;
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels.Core
+namespace AvalonDockMVVM.ViewModels.Core.Layout
 {
-    public abstract class LayoutItemVm : BaseVm
+    public abstract class DocumentLayoutItemVm : LayoutItemVm
     {
 
         private bool _isClosed;
-        private bool _canClose;
 
 
         #region CONSTRUCTORs
 
-        protected LayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
+        protected DocumentLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
+            : base(title, imageSource)
         {
-            Title = title;
-            ImageSource = imageSource;
             IsClosed = isClosed;
             CanClose = canClose;
             CloseCommand = new RelayCommand(call => Close());
@@ -39,10 +37,6 @@ namespace AvalonDockMVVM.ViewModels.Core
 
         #endregion
 
-
-        public string Title { get; }
-
-        public Uri ImageSource { get; }
 
         public bool IsClosed
         {

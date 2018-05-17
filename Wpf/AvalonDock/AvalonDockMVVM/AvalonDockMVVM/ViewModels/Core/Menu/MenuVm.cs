@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="MenuViewModel.cs">
+// <copyright company="Siemens AG" file="MenuVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,12 +13,12 @@
 
 using System.Collections.Generic;
 
-using AvalonDockMVVM.ViewModels.Core;
+using AvalonDockMVVM.ViewModels.Core.Layout;
 
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels.Menu
+namespace AvalonDockMVVM.ViewModels.Core.Menu
 {
     public class MenuVm
     {
@@ -28,20 +28,20 @@ namespace AvalonDockMVVM.ViewModels.Menu
 
         #region CONSTRUCTORs
 
-        public MenuVm(IEnumerable<LayoutItemVm> docItems, IEnumerable<HidableAnchorableLayoutItemVm> hidableAnchorableItems)
+        public MenuVm(IEnumerable<DocumentLayoutItemVm> docItems, IEnumerable<HidableAnchorableLayoutItemVm> hidableAnchorableItems)
         {
             var documentsViewMenu = GetDocumentLayoutMenuVm("Documents", docItems);
 
             var anchorablesViewMenu = GetAnchorableLayoutMenuVm("Anchorables", hidableAnchorableItems);
 
-            var items = new List<CheckableMenuItemVm> { documentsViewMenu, anchorablesViewMenu };
+            var items = new List<CheckableMenuItemVm> {documentsViewMenu, anchorablesViewMenu};
             Items = items;
         }
 
         #endregion
 
 
-        private static CheckableMenuItemVm GetDocumentLayoutMenuVm(string menuName, IEnumerable<LayoutItemVm> docItems)
+        private static CheckableMenuItemVm GetDocumentLayoutMenuVm(string menuName, IEnumerable<DocumentLayoutItemVm> docItems)
         {
             var documentsViewMenu = new CheckableMenuItemVm(header: menuName, isCheckable: false, command: null);
 
@@ -58,5 +58,6 @@ namespace AvalonDockMVVM.ViewModels.Menu
                 documentsViewMenu.Items.Add(new HidableAnchorableMenuItemVm(docItem));
             return documentsViewMenu;
         }
+
     }
 }

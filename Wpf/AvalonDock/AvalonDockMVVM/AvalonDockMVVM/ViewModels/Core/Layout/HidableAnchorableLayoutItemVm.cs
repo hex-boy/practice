@@ -1,7 +1,7 @@
 ﻿#region Copyright
 
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright company="Siemens AG" file="AnchorableLayoutItemVm.cs">
+// <copyright company="Siemens AG" file="HidableAnchorableLayoutItemVm.cs">
 //   Copyright (C) Siemens AG 2018-2018. All rights reserved. Confidential.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -17,21 +17,19 @@ using System.Windows.Input;
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels.Core
+namespace AvalonDockMVVM.ViewModels.Core.Layout
 {
-    public class HidableAnchorableLayoutItemVm : AnchorableLayoutItemVm
+    public abstract class HidableAnchorableLayoutItemVm : AnchorableLayoutItemVm
     {
 
         private bool _isVisible;
 
-
-        public HidableAnchorableLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
-            : base(title, imageSource, isClosed, canClose)
+        protected HidableAnchorableLayoutItemVm(string title, Uri imageSource)
+            : base(title, imageSource)
         {
             HideCommand = new RelayCommand(call => Hide());
             IsVisible = true;
         }
-
 
         public bool IsVisible
         {
@@ -45,10 +43,10 @@ namespace AvalonDockMVVM.ViewModels.Core
 
         public ICommand HideCommand { get; }
 
-
         private void Hide()
         {
             IsVisible = false;
         }
+
     }
 }

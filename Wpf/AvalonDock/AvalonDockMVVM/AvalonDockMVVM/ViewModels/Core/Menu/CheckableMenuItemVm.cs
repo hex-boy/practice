@@ -14,12 +14,10 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 
-using AvalonDockMVVM.ViewModels.Core;
-
 #endregion
 
 
-namespace AvalonDockMVVM.ViewModels.Menu
+namespace AvalonDockMVVM.ViewModels.Core.Menu
 {
     public class CheckableMenuItemVm : BaseVm
     {

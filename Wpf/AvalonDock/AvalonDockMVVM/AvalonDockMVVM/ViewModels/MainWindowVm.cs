@@ -13,9 +13,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-using AvalonDockMVVM.ViewModels.Core;
-using AvalonDockMVVM.ViewModels.Menu;
+using AvalonDockMVVM.ViewModels.Core.Layout;
+using AvalonDockMVVM.ViewModels.Core.Menu;
 
 #endregion
 
@@ -25,13 +26,71 @@ namespace AvalonDockMVVM.ViewModels
     public class MainWindowVm
     {
 
+        #region CONSTRUCTORs
+
+        public MainWindowVm()
+        {
+            var documents = GetDocuments();
+
+            var hidableAnchorables = GetHidableAnchorables();
+
+            var notHidableAnchorables = GetNotHidableAnchorables();
+
+            var anchorables = notHidableAnchorables
+                .Union(hidableAnchorables);
+
+            DockManagerViewModel = new DockManagerVm(documents, anchorables);
+
+            MenuViewModel = new MenuVm(documents, hidableAnchorables);
+        }
+
+        #endregion
+
+
         public DockManagerVm DockManagerViewModel { get; }
 
         public MenuVm MenuViewModel { get; }
 
-        public MainWindowVm()
+
+        #region PRIVATE METHODS
+
+        private static AnchorableLayoutItemVm[] GetNotHidableAnchorables()
         {
-            var documents = new List<LayoutItemVm>();
+            var sampleAnchorableVm = new SampleAnchorableVm(
+                "Anchorable 01",
+                new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"))
+            {
+                SomeContentText = "Anchorable - 01"
+            };
+
+            var notHidableAnchorables = new AnchorableLayoutItemVm[] {sampleAnchorableVm};
+            return notHidableAnchorables;
+        }
+
+        private static List<HidableAnchorableLayoutItemVm> GetHidableAnchorables()
+        {
+            var hidableAnchorableSamples = new List<HidableAnchorableLayoutItemVm>
+            {
+                new SampleHidableAnchorableVm(
+                    "Hid Anchorable 01",
+                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"))
+                {
+                    SomeHidableContentText = "Hidable Anchorable - 01"
+                },
+
+                new SampleHidableAnchorableVm(
+                    "Hid Anchorable 02",
+                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"))
+                {
+                    SomeHidableContentText = "Hidable Anchorable - 02"
+                }
+            };
+            return hidableAnchorableSamples;
+        }
+
+        private static List<DocumentLayoutItemVm> GetDocuments()
+        {
+            var documents = new List<DocumentLayoutItemVm>();
 
             for (var i = 0; i < 6; i++)
                 documents.Add(
@@ -40,35 +99,10 @@ namespace AvalonDockMVVM.ViewModels
                         new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png"),
                         false,
                         i % 2 == 0) {ContentText = $"Document - 0{i}"});
-
-            var hidableAnchorables = new List<HidableAnchorableLayoutItemVm>
-            {
-                new SampleHidableAnchorableVm(
-                    "Hid Anchorable 01",
-                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"),
-                    false,
-                    false) {SomeHidableContentText = "Hidable Anchorable - 01"},
-
-                new SampleHidableAnchorableVm(
-                    "Hid Anchorable 02",
-                    new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"),
-                    false,
-                    false) {SomeHidableContentText = "Hidable Anchorable - 02"}
-            };
-
-            var sampleAnchorableVm = new SampleAnchorableVm(
-                "Anchorable 01",
-                new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"),
-                false,
-                false)
-            {
-                SomeContentText = "Anchorable - 01"
-            };
-
-            DockManagerViewModel = new DockManagerVm(documents, new[] { sampleAnchorableVm }, hidableAnchorables);
-
-            MenuViewModel = new MenuVm(documents, hidableAnchorables);
+            return documents;
         }
+
+        #endregion
 
     }
 }

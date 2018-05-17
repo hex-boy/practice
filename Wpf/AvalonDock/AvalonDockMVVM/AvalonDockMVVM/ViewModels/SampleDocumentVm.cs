@@ -13,14 +13,14 @@
 
 using System;
 
-using AvalonDockMVVM.ViewModels.Core;
+using AvalonDockMVVM.ViewModels.Core.Layout;
 
 #endregion
 
 
 namespace AvalonDockMVVM.ViewModels
 {
-    public class SampleDocumentVm : LayoutItemVm
+    public class SampleDocumentVm : DocumentLayoutItemVm
     {
 
         private string _contentText;

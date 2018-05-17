@@ -73,6 +73,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LayoutItemStyleSelector.cs" />
+    <Compile Include="LayoutItemTemplateSelector.cs" />
     <Compile Include="ViewModel\AnchorableLayoutItemVm.cs" />
     <Compile Include="ViewModel\BaseVm.cs" />
     <Compile Include="RelayCommand.cs" />

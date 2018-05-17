@@ -10,9 +10,18 @@
         xmlns:avControls="clr-namespace:Xceed.Wpf.AvalonDock.Controls;assembly=Xceed.Wpf.AvalonDock"
         xmlns:avLayout="clr-namespace:Xceed.Wpf.AvalonDock.Layout;assembly=Xceed.Wpf.AvalonDock"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Width="1024" Height="768"
         d:DataContext="{Binding Source={d:DesignInstance Type=local:MainViewModel, IsDesignTimeCreatable=True}}"
         >
+    <Window.Resources>
+        <DataTemplate x:Key="LayoutItemHeaderTemplate" DataType="{x:Type avControls:LayoutItem}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+                <TextBlock Text="{Binding Title}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,53 +41,51 @@
         </Menu>
 
         <av:DockingManager Grid.Row="1"
-                         DataContext="{Binding DockManagerViewModel}"
-                         DocumentsSource="{Binding Documents}"
-                         AnchorablesSource="{Binding Anchorables}" >
-
+                           DataContext="{Binding DockManagerViewModel}"
+                           DocumentsSource="{Binding Documents}"
+                           AnchorablesSource="{Binding Anchorables}"
+                           DocumentHeaderTemplate="{StaticResource LayoutItemHeaderTemplate}"
+                           AnchorableTitleTemplate="{StaticResource LayoutItemHeaderTemplate}">
+                         
             <av:DockingManager.Resources>
 
-                <!-- add views for specific ViewModels -->
-                <DataTemplate DataType="{x:Type vm:SampleDocumentVm}">
-                    <views:SampleDockWindowView DataContext="{Binding ContentText}" />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type vm:SampleAnchorableVm}">
-                    <views:SampleDockWindowView DataContext="{Binding SomeContentText}" />
-                </DataTemplate>
-
-            </av:DockingManager.Resources>
-
-            <av:DockingManager.LayoutItemContainerStyle>
                 <!-- you can add additional bindings from the layoutitem to the DockWindowViewModel -->
-                <Style TargetType="{x:Type avControls:LayoutItem}" >
+                <Style x:Key="DocumentLayoutItemStyle" 
+                       TargetType="{x:Type avControls:LayoutItem}" >
                     <Setter Property="Title" Value="{Binding Model.Title}" />
                     <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                     <Setter Property="CanClose" Value="{Binding Model.CanClose}" />
                     <Setter Property="IconSource" Value="{Binding Model.ImageSource}" />
                 </Style>
-            </av:DockingManager.LayoutItemContainerStyle>
-
-            <av:DockingManager.DocumentHeaderTemplate>
-                <DataTemplate DataType="{x:Type avControls:LayoutItem}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
-                        <TextBlock Text="{Binding Title}" />
-                    </StackPanel>
+                <Style x:Key="AnchorableLayoutItemStyle" 
+                       TargetType="{x:Type avControls:LayoutAnchorableItem}" 
+                       BasedOn="{StaticResource DocumentLayoutItemStyle}" >
+                    <Setter Property="CanHide" Value="{Binding Model.CanHide}" />
+                </Style>
+                
+                <!-- add views for specific ViewModels -->
+                <DataTemplate x:Key="SampleDocumentTemplate" DataType="{x:Type vm:SampleDocumentVm}">
+                    <views:SampleDockWindowView DataContext="{Binding ContentText}" />
                 </DataTemplate>
-            </av:DockingManager.DocumentHeaderTemplate>
-
-            <av:DockingManager.AnchorableTitleTemplate>
-                <DataTemplate DataType="{x:Type avControls:LayoutItem}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
-                        <TextBlock Text="{Binding Title}" />
-                    </StackPanel>
+                <DataTemplate x:Key="SampleAnchorableTemplate" DataType="{x:Type vm:SampleAnchorableVm}">
+                    <views:SampleDockWindowView DataContext="{Binding SomeContentText}" />
                 </DataTemplate>
-            </av:DockingManager.AnchorableTitleTemplate>
+
+            </av:DockingManager.Resources>
+
+            <av:DockingManager.LayoutItemContainerStyleSelector>
+                <local:LayoutItemStyleSelector DocumentStyle="{StaticResource DocumentLayoutItemStyle}"
+                                               AnchorableStyle="{StaticResource AnchorableLayoutItemStyle}" />
+            </av:DockingManager.LayoutItemContainerStyleSelector>
+            
+            <av:DockingManager.LayoutItemTemplateSelector>
+                <local:LayoutItemTemplateSelector DocumentLayoutItemContentTemplate="{StaticResource SampleDocumentTemplate}"
+                                                  AnchorableLayoutItemContentTemplate="{StaticResource SampleAnchorableTemplate}" />
+            </av:DockingManager.LayoutItemTemplateSelector>
             
             <avLayout:LayoutRoot>
                 <avLayout:LayoutPanel Orientation="Horizontal">
-                    <avLayout:LayoutAnchorablePane DockWidth="184" />
+                    <avLayout:LayoutAnchorablePane DockWidth="232" />
                     <avLayout:LayoutDocumentPane />
                 </avLayout:LayoutPanel>
             </avLayout:LayoutRoot>

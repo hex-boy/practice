@@ -25,8 +25,8 @@ namespace AvalonDockMvvm.Usage.ViewModels
 
         private string _someContentText;
 
-        public SampleAnchorableVm(string title, Uri imageSource)
-            : base(title, imageSource) { }
+        public SampleAnchorableVm(string title, string contentId, Uri imageSource)
+            : base(title, contentId, imageSource) { }
 
         public string SomeContentText
         {

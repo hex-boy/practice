@@ -24,8 +24,8 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core.Layout
 
         private bool _isVisible;
 
-        protected HidableAnchorableLayoutItemVm(string title, Uri imageSource)
-            : base(title, imageSource)
+        protected HidableAnchorableLayoutItemVm(string title, string contentId, Uri imageSource)
+            : base(title, contentId, imageSource)
         {
             HideCommand = new RelayCommand(call => Hide());
             IsVisible = true;

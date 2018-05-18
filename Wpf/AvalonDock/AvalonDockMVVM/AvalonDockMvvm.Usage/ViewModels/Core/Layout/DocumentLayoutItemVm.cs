@@ -27,8 +27,8 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core.Layout
 
         #region CONSTRUCTORs
 
-        protected DocumentLayoutItemVm(string title, Uri imageSource, bool isClosed, bool canClose)
-            : base(title, imageSource)
+        protected DocumentLayoutItemVm(string title, string contentId, Uri imageSource, bool isClosed, bool canClose)
+            : base(title, contentId, imageSource)
         {
             IsClosed = isClosed;
             CanClose = canClose;

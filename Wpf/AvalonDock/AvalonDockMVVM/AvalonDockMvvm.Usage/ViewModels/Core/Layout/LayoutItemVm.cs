@@ -23,9 +23,16 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core.Layout
 
         #region CONSTRUCTORs
 
-        protected LayoutItemVm(string title, Uri imageSource)
+        protected LayoutItemVm(string title, string contentId, Uri imageSource)
         {
+            if (string.IsNullOrEmpty(title))
+                throw new ArgumentNullException(nameof(title));
+
+            if (string.IsNullOrEmpty(contentId))
+                throw new ArgumentNullException(nameof(contentId));
+
             Title = title;
+            ContentId = contentId;
             ImageSource = imageSource;
         }
 
@@ -34,7 +41,9 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core.Layout
 
         public string Title { get; }
 
-        public Uri ImageSource { get; }
+        public string ContentId { get; }
 
+        public Uri ImageSource { get; }
+        
     }
 }

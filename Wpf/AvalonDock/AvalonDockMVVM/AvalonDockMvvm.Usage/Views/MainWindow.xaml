@@ -22,9 +22,10 @@
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -40,13 +41,23 @@
                 <HierarchicalDataTemplate DataType="{x:Type menu:CheckableMenuItemVm}" ItemsSource="{Binding Items}" />
             </Menu.Resources>
         </Menu>
-
-        <av:DockingManager Grid.Row="1"
+        
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal">
+            <Button Content="Save Layout"
+                    Click="SaveButton_Click"/>
+            <Button Content="Load Layout"
+                    Click="LoadButton_Click"/>
+        </StackPanel>
+        
+        <av:DockingManager x:Name="_avalonDockManager"
+                           Grid.Row="2"
                            DataContext="{Binding DockManagerViewModel}"
                            DocumentsSource="{Binding Documents}"
                            AnchorablesSource="{Binding Anchorables}"
                            DocumentHeaderTemplate="{StaticResource LayoutItemHeaderTemplate}"
-                           AnchorableTitleTemplate="{StaticResource LayoutItemHeaderTemplate}">
+                           AnchorableTitleTemplate="{StaticResource LayoutItemHeaderTemplate}"
+                           Loaded="_avalonDockManager_OnLoaded">
                          
             <av:DockingManager.Resources>
                 
@@ -56,6 +67,7 @@
                 <Style x:Key="DocumentLayoutItemStyle" 
                        TargetType="{x:Type avControls:LayoutItem}" >
                     <Setter Property="Title" Value="{Binding Model.Title}" />
+                    <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
                     <Setter Property="IconSource" Value="{Binding Model.ImageSource}" />
                     <Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
                     <Setter Property="CanClose" Value="{Binding Model.CanClose}" />

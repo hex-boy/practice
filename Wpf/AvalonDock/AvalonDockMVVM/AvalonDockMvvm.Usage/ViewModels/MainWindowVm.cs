@@ -58,6 +58,7 @@ namespace AvalonDockMvvm.Usage.ViewModels
         {
             var sampleAnchorableVm = new SampleAnchorableVm(
                 "Anchorable 01",
+                "Anchorable01",
                 new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/alarm-clock-blue.png"))
             {
                 SomeContentText = "Anchorable - 01"
@@ -72,14 +73,14 @@ namespace AvalonDockMvvm.Usage.ViewModels
             var hidableAnchorableSamples = new List<HidableAnchorableLayoutItemVm>
             {
                 new SampleHidableAnchorableVm(
-                    "Hid Anchorable 01",
+                    "Hid Anchorable 01", "HidAnchorable01",
                     new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"))
                 {
                     SomeHidableContentText = "Hidable Anchorable - 01"
                 },
 
                 new SampleHidableAnchorableVm(
-                    "Hid Anchorable 02",
+                    "Hid Anchorable 02", "HidAnchorable02",
                     new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/property-blue.png"))
                 {
                     SomeHidableContentText = "Hidable Anchorable - 02"
@@ -96,6 +97,7 @@ namespace AvalonDockMvvm.Usage.ViewModels
                 documents.Add(
                     new SampleDocumentVm(
                         "Document 0" + i,
+                        "Document0" + i,
                         new Uri(@"pack://application:,,,/AvalonDockMVVM;component/Images/document.png"),
                         false,
                         i % 2 == 0) {ContentText = $"Document - 0{i}"});

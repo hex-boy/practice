@@ -21,8 +21,8 @@ namespace AvalonDockMvvm.Usage.ViewModels.Core.Layout
     public abstract class AnchorableLayoutItemVm : LayoutItemVm
     {
 
-        protected AnchorableLayoutItemVm(string title, Uri imageSource)
-            : base(title, imageSource) { }
+        protected AnchorableLayoutItemVm(string title, string contentId, Uri imageSource)
+            : base(title, contentId, imageSource) { }
 
     }
 }

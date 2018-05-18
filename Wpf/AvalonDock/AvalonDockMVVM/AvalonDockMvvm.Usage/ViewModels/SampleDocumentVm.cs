@@ -25,8 +25,8 @@ namespace AvalonDockMvvm.Usage.ViewModels
 
         private string _contentText;
 
-        public SampleDocumentVm(string title, Uri imageSource, bool isClosed, bool canClose)
-            : base(title, imageSource, isClosed, canClose) { }
+        public SampleDocumentVm(string title, string contentId, Uri imageSource, bool isClosed, bool canClose)
+            : base(title, contentId, imageSource, isClosed, canClose) { }
 
         public string ContentText
         {

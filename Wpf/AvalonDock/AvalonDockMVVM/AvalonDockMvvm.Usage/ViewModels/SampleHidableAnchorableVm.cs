@@ -25,8 +25,8 @@ namespace AvalonDockMvvm.Usage.ViewModels
 
         private string _someContentText;
 
-        public SampleHidableAnchorableVm(string title, Uri imageSource)
-            : base(title, imageSource) { }
+        public SampleHidableAnchorableVm(string title, string contentId, Uri imageSource)
+            : base(title, contentId, imageSource) { }
 
         public string SomeHidableContentText
         {

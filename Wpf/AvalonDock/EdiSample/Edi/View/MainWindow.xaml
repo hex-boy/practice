@@ -4,13 +4,14 @@
 
         xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
 
-        xmlns:avBehav="clr-namespace:Edi.View.Behavior"
         xmlns:conv="clr-namespace:Edi.Converter"
         xmlns:pane="clr-namespace:Edi.View.Pane"
         xmlns:vm="clr-namespace:Edi.ViewModel"
 
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        
+        xmlns:behaviors="clr-namespace:Edi.View.Behaviors"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
         x:Name="mainWindow"
         Title="MainWindow" Height="650" Width="825">
   <Window.Resources>
@@ -126,14 +127,16 @@
       </ToolBarTray>
     </Grid>
 
-    <avalonDock:DockingManager AnchorablesSource="{Binding Tools}" x:Name="dockManager" x:FieldModifier="private"
+    <avalonDock:DockingManager AnchorablesSource="{Binding Tools}" x:Name="DockManager" x:FieldModifier="private"
                                 DocumentsSource="{Binding Files}"
                                 ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
                                 IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanNotConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                avBehav:AvalonDockLayoutSerializer.LoadLayoutCommand="{Binding ADLayout.LoadLayoutCommand}"
-                                avBehav:AvalonDockLayoutSerializer.SaveLayoutCommand="{Binding ADLayout.SaveLayoutCommand}"
+                               Grid.Row="2">
 
-                                Grid.Row="2">
+        <i:Interaction.Behaviors>
+                <behaviors:AvalonDockLayoutSerializerBehavior LoadLayoutCommand="{Binding ADLayout.LoadLayoutCommand}"
+                                                              SaveLayoutCommand="{Binding ADLayout.SaveLayoutCommand}" />
+        </i:Interaction.Behaviors>
 
       <avalonDock:DockingManager.DocumentHeaderTemplate>
         <DataTemplate>

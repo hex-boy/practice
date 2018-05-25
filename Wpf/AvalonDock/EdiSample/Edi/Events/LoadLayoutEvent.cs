@@ -8,18 +8,12 @@ namespace Edi.Events
   /// </summary>
   public class LoadLayoutEvent : CompositePresentationEvent<string>
   {
-    private static readonly EventAggregator _eventAggregator;
-    private static readonly LoadLayoutEvent _event;
+      static LoadLayoutEvent()
+      {
+          var eventAggregator = new EventAggregator();
+          Instance = eventAggregator.GetEvent<LoadLayoutEvent>();
+      }
 
-    static LoadLayoutEvent()
-    {
-      _eventAggregator = new EventAggregator();
-      _event = _eventAggregator.GetEvent<LoadLayoutEvent>();
-    }
-
-    public static LoadLayoutEvent Instance
-    {
-      get { return _event; }
-    }
+    public static LoadLayoutEvent Instance { get; }
   }
 }

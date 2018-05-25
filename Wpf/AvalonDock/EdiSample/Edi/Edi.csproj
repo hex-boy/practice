@@ -119,14 +119,14 @@
     <Compile Include="Converter\BooleanNotConverter.cs" />
     <Compile Include="Converter\BooleanToVisibilityConverter .cs" />
     <Compile Include="Events\LoadLayoutEvent.cs" />
-    <Compile Include="Events\SynchronousEvent.cs" />
+    <Compile Include="Events\SaveLayoutEvent.cs" />
     <Compile Include="Events\SaveLayoutEventArgs.cs" />
     <Compile Include="Interfaces\ILayoutViewModelParent.cs" />
     <Compile Include="Interfaces\IViewModelResolver.cs" />
     <Compile Include="ViewModel\AvalonDockLayoutViewModel.cs" />
     <Compile Include="ViewModel\FileStatsViewModel.cs" />
     <Compile Include="ViewModel\FileViewModel.cs" />
-    <Compile Include="View\Behavior\AvalonDockLayoutSerializer.cs" />
+    <Compile Include="View\Behaviors\AvalonDockLayoutSerializerBehavior.cs" />
     <Compile Include="View\Pane\LayoutInitializer.cs" />
     <Compile Include="View\Pane\PanesStyleSelector.cs" />
     <Compile Include="View\Pane\PanesTemplateSelector.cs" />

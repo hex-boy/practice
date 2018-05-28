@@ -142,9 +142,9 @@ namespace Edi.ViewModel
         {
             get
             {
-                return _saveLayoutCommand ?? (_saveLayoutCommand = new DelegateCommand<object>((p) =>
+                return _saveLayoutCommand ?? (_saveLayoutCommand = new DelegateCommand<object>((fileTextContent) =>
                 {
-                    var xmlLayout = p as string;
+                    var xmlLayout = fileTextContent as string;
 
                     if (xmlLayout == null)
                         return;

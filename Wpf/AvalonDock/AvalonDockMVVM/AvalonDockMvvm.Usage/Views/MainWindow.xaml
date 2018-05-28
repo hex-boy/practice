@@ -10,10 +10,11 @@
         xmlns:converter="clr-namespace:AvalonDockMvvm.Usage.Converter"
         xmlns:vm="clr-namespace:AvalonDockMvvm.Usage.ViewModels"
         xmlns:views="clr-namespace:AvalonDockMvvm.Usage.Views"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" Width="1024" Height="768"
         d:DataContext="{Binding Source={d:DesignInstance Type=vm:MainWindowVm, IsDesignTimeCreatable=True}}"
-        >
+         >
     <Window.Resources>
         <DataTemplate x:Key="LayoutItemHeaderTemplate" DataType="{x:Type avControls:LayoutItem}">
             <StackPanel Orientation="Horizontal">
@@ -21,6 +22,7 @@
                 <TextBlock Text="{Binding Title}" />
             </StackPanel>
         </DataTemplate>
+        <converter:BoolToNotConverter x:Key="BoolToNotConverter" />
     </Window.Resources>
 
     <Grid>
@@ -52,13 +54,18 @@
         
         <av:DockingManager x:Name="_avalonDockManager"
                            Grid.Row="2"
+                           IsEnabled="{Binding IsBusy, Converter={StaticResource BoolToNotConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                            DataContext="{Binding DockManagerViewModel}"
                            DocumentsSource="{Binding Documents}"
                            AnchorablesSource="{Binding Anchorables}"
                            DocumentHeaderTemplate="{StaticResource LayoutItemHeaderTemplate}"
                            AnchorableTitleTemplate="{StaticResource LayoutItemHeaderTemplate}"
-                           Loaded="_avalonDockManager_OnLoaded">
-                         
+                           >
+            <i:Interaction.Behaviors>
+                <views:AvalonDockLayoutSerializerBehavior LoadLayoutCommand="{Binding LoadLayoutCommand}"
+                                                              SaveLayoutCommand="{Binding SaveLayoutCommand}" />
+            </i:Interaction.Behaviors>
+
             <av:DockingManager.Resources>
                 
                 <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" FalseValueVisibility="Hidden" />

@@ -13,6 +13,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 
 using AvalonDockMvvm.Usage.ViewModels.Core.Layout;
@@ -23,7 +25,23 @@ using AvalonDockMvvm.Usage.ViewModels.Core.Menu;
 
 namespace AvalonDockMvvm.Usage.ViewModels
 {
-    public class MainWindowVm
+    public interface ILayoutParentVm
+    {
+
+        bool IsBusy { get; set; }
+
+        string ApplicationUserDirectory { get; }
+
+    }
+
+
+    public interface IDocumentViewModelResolver
+    {
+        INotifyPropertyChanged GetContentViewModelFromId(string contentId);
+    }
+
+
+    public class MainWindowVm : IDocumentViewModelResolver
     {
 
         #region CONSTRUCTORs
@@ -39,7 +57,7 @@ namespace AvalonDockMvvm.Usage.ViewModels
             var anchorables = notHidableAnchorables
                 .Union(hidableAnchorables);
 
-            DockManagerViewModel = new DockManagerVm(documents, anchorables);
+            DockManagerViewModel = new DockManagerVm(Directory.GetCurrentDirectory(), documents, anchorables);
 
             MenuViewModel = new MenuVm(documents, hidableAnchorables);
         }
@@ -106,5 +124,14 @@ namespace AvalonDockMvvm.Usage.ViewModels
 
         #endregion
 
+        #region IDocumentViewModelResolver
+
+        // Es wird verwendet um z.B. Dokument-View Models zu laden
+        public INotifyPropertyChanged GetContentViewModelFromId(string contentId)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }

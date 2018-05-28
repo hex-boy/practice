@@ -11,6 +11,7 @@
 
 #region Used namespaces
 
+using System;
 using System.Windows;
 
 using AvalonDockMvvm.Usage.ViewModels;
@@ -27,13 +28,15 @@ namespace AvalonDockMvvm.Usage
     public partial class App
     {
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
-            MainWindow.Show();
-
-            MainWindow.DataContext = new MainWindowVm();
+            base.OnStartup(e);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+
+        }
     }
 }
